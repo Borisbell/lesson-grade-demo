@@ -1,0 +1,6 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icon Circle-lock">
+<rect width="40" height="40" rx="20" fill="white"/>
+<path id="block" d="M20 8C24.412 8 28 11.588 28 16V18C29.104 18 30 18.896 30 20V28C30 29.104 29.104 30 28 30H12C10.896 30 10 29.104 10 28V20C10 18.896 10.896 18 12 18V16C12 11.588 15.588 8 20 8ZM20 12C17.794 12 16 13.794 16 16V18H24V16C24 13.794 22.206 12 20 12Z" fill="#2F2F45" fill-opacity="0.6"/>
+</g>
+</svg>

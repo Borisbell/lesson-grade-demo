@@ -1,0 +1,131 @@
+/* Version 2: Figma section 5218:7717. */
+body{background:linear-gradient(180deg,#35077e,#5926b4)}
+.nav,body[data-view="dashboard"] .nav{height:48px;padding:4px 24px;font-size:16px}
+.nav-left,body[data-view="dashboard"] .nav-left{gap:32px}
+.nav-links,body[data-view="dashboard"] .nav-links{gap:20px}
+.logo{width:90px;height:16px;margin:0 4px}
+.header-icon,body[data-view="dashboard"] .header-icon{width:40px;height:40px}
+.badge,body[data-view="dashboard"] .badge{left:auto;right:0;top:0;width:16px;height:16px;border-width:2px;font-size:10px;line-height:12px}
+.profile>.nav-avatar-frame,body[data-view="dashboard"] .nav-avatar-frame{width:40px;height:40px;display:grid;place-items:center}
+.nav-avatar-frame img,body[data-view="dashboard"] .nav-avatar-frame img{transform:none}
+.profile,body[data-view="dashboard"] .profile{left:50%;gap:6px}
+.currency,body[data-view="dashboard"] .currency{height:36px;padding:6px 12px;font-size:14px;gap:4px}
+.nav-right{gap:12px}.access,body[data-view="dashboard"] .access{margin-left:4px;height:36px;font-size:14px;width:152px;justify-content:center}
+body:not([data-view="bonus"]) .extra-currency:has(#nav-gems-value){display:none}
+body:not([data-view="bonus"]) .extra-currency:has(#nav-coins-value){display:flex}
+body[data-completed="false"] .grades-sidebar{display:none}
+#stage{min-height:calc(100svh - 48px);padding:65px 24px 80px;place-items:start center;grid-template-columns:minmax(0,1fr)}
+.rays img{top:321.49px;left:50%;transform:translate(-50%,-50%)}
+.reward-screen{width:640px;height:444px;gap:24px;justify-content:flex-start}
+.reward-art{width:294px;height:294px;flex-shrink:0;position:relative;margin:0;transform:none}
+.reward-art>img{position:absolute;left:27.22px;top:46.19px;transform:rotate(-2.53deg)}
+.reward-counter{position:absolute;right:4.9px;bottom:4.9px;min-width:98px;height:98px;border:9.8px solid #fff;border-radius:100px;background:#f5f6f7;color:#2f2f45;display:grid;place-items:center;font-size:58.8px;line-height:78.4px;font-weight:700}
+#stage[data-step="preparing"],#stage[data-step="ready"],#stage[data-step="parent-check"]{padding-top:40px}
+.parent-card,.parent-card.ready{width:704px;height:auto;padding:32px 32px 52px;background:transparent;box-shadow:none;gap:42px;justify-content:flex-start;color:#fff;border-radius:0}
+.preparing-heading{display:flex;align-items:center;justify-content:center;min-height:40px}
+.preparing-heading h1{font-size:32px;line-height:38px;white-space:nowrap}
+.preparing-heading button{padding:0;background:transparent;flex:0 0 40px;width:40px;height:40px;border-radius:50%}
+.ready .preparing-heading h1{font-size:40px;line-height:46px}
+.ready #grade-voice{display:none}
+.closed-chests{width:605px;height:197px;position:relative;overflow:hidden;flex-shrink:0}
+.closed-chests img{position:absolute;width:104.7%;height:180.61%;left:-2.57%;top:-40.31%;max-width:none}
+.parent-actions,.parent-card.ready .parent-actions{gap:24px;width:512px}
+.parent-card .button{height:59px;width:100%}
+.grade-progress{height:20px;position:relative;overflow:hidden;border-radius:1000px;background:#0006;display:grid;place-items:center;width:100%}
+.progress-fill{background:#5fd34c;border-radius:1000px}
+#progress-percent{position:relative;z-index:1;font-size:13px;line-height:14px;font-weight:700;color:#fff}
+.open-grade{background:#f94477;color:#fff}.open-grade:hover{background:#e83266}
+#stage[data-step="result"]{padding:24px 24px 40px;place-items:start center}
+.results{width:min(924px,100%);min-width:0;max-width:100%;color:#2f2f45}
+.result-panel{display:flex;flex-direction:column;gap:16px;padding:24px 32px;background:#e7e3ff;border-radius:32px;overflow:hidden}
+.result-summary{display:flex;flex-direction:column;gap:16px}
+.result-summary h2{font-size:24px;line-height:28px;font-weight:700}
+.result-top{display:flex;align-items:center;justify-content:space-between;position:relative;padding-right:14px;height:216px}
+.result-podium{position:absolute;left:388px;top:118px;pointer-events:none}
+.statistics{width:388px;flex-shrink:0;position:relative;z-index:1;overflow:hidden}
+.chart-base{left:0;top:0}
+.chart{transform:none;margin:0;width:216px;height:216px}
+.metrics{width:140px;gap:16px}.metric{height:60px;border-radius:20px;padding:12px;gap:8px}
+.metric-icon{width:36px;height:36px}.metric strong{font-size:24px;line-height:28px;min-width:0}
+.metric-value>span{font-size:14px;line-height:20px}
+.result-reward{width:410px;height:145px;overflow:visible;border-radius:0;flex-shrink:0}
+.open-chests{position:relative;width:410px;height:145px;overflow:hidden}
+.open-chests img{position:absolute;width:221.22%;height:224.18%;left:-114.57%;top:-9.55%}
+.result-content{display:flex;flex-direction:column;gap:12px}
+.tutor{width:100%;position:relative;z-index:1}
+.tutor-card{height:258px;background:transparent;color:#2f2f45;overflow:visible;border-radius:0;box-shadow:none}
+.tutor-copy{top:24px;left:24px;right:auto;max-width:541px}
+.eyebrow{font-size:17px;line-height:24px;font-weight:700;color:#634ad6;margin:0 0 8px;white-space:nowrap}
+.tutor-copy h3{font-family:inherit;font-size:32px;line-height:38px;letter-spacing:0;transform:none;width:auto;white-space:normal;font-weight:700}
+.tutor-description{font-size:17px;line-height:24px;margin-top:8px;white-space:normal}
+.teacher-photo{left:587px;top:25px;bottom:auto;width:292px;height:262px;transform:none;overflow:hidden}
+.teacher-photo img{position:absolute;left:-25.14%;top:-.23%;width:131.48%;height:100.22%;object-fit:fill}
+.teacher-caption{position:absolute;left:708.5px;top:222px;transform:translateX(-50%);border-radius:24px;padding:6px 8px;background:#fff9;backdrop-filter:blur(3.25px);font-size:11px;line-height:14px;font-weight:700;white-space:nowrap}
+.enrollment{position:absolute;left:24px;top:138px;width:541px}
+.phone-form{position:relative;left:auto;right:auto;bottom:auto;width:100%;height:68px;padding:6px 6px 6px 16px;border-radius:22px;gap:40px}
+.phone-field label{font-size:14px;line-height:20px;margin-bottom:8px;color:#2f2f45}
+.phone-field input{font-size:24px;line-height:24px}
+.signup{height:56px;width:261px;flex-shrink:0;font-size:20px;line-height:24px;background:#ff4b5c}
+.legal{margin-top:4px;color:#2f2f45a6;height:24px}.legal p{font-size:10px;line-height:12px}
+.phone-error{color:#ce243d;font-size:13px;line-height:18px;margin-top:4px}
+.tutor-card:has(#phone-error:not([hidden])){height:284px}
+.tutor-success{position:absolute;left:24px;right:auto;top:138px;bottom:auto;padding:0;width:541px;gap:10px;text-align:left;align-items:flex-start;color:#2f2f45}
+.tutor-success>div:first-child{position:relative;padding-left:44px}
+.tutor-success>div:first-child>img{position:absolute;left:0;top:0}
+.tutor-success h3{font-size:24px;line-height:28px}.tutor-success p{font-size:16px;line-height:24px}
+.tutor-success>div:last-child{display:flex;gap:8px;flex-wrap:wrap}
+.tutor-success button{padding:0;background:transparent;text-decoration:underline;color:#634ad6;font-size:16px;line-height:24px}
+.tutor-card:has(#tutor-success:not([hidden])){height:300px}
+.tutor-card:has(#tutor-success:not([hidden])) .teacher-caption,.tutor-card:has(#tutor-success:not([hidden])) .enrollment{display:none}
+.result-details{display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;z-index:2}
+.comparison-cards{display:flex;flex-direction:column;gap:24px;min-width:0}
+.comparison-card,.answer-results{background:#fff;border-radius:24px;padding:24px;min-width:0}
+.comparison-card{display:flex;flex-direction:column;gap:12px;min-height:139px}
+.comparison-card h3,.answer-results h3{font-size:20px;line-height:24px;font-weight:700}
+.comparison-chart{display:flex;gap:4px;align-items:center}
+.comparison-labels{display:flex;flex-direction:column;justify-content:center;gap:12px;width:109px;flex-shrink:0;font-size:14px;line-height:14px;text-align:right}
+.comparison-bars{display:flex;flex-direction:column;gap:12px;justify-content:center;height:55px;border-left:2px solid #4d4d4d;flex:1;min-width:0}
+.comparison-bars>div{display:flex;align-items:center;gap:4px;font-size:14px;line-height:14px;white-space:nowrap}
+.comparison-bar{display:block;width:var(--bar-width);max-width:calc(100% - 75px);height:16px;border-radius:0 4px 4px 0;flex-shrink:0;transform-origin:left}
+.comparison-bar.green{background:#06d32c}.comparison-bar.red{background:#ff6170}.comparison-bar.other{background:#2f2f45}
+.comparison-card:nth-child(3) .comparison-bar{max-width:calc(100% - 46px)}
+.parent-check::backdrop{background:linear-gradient(to bottom,transparent 48px,#2f2f45cc 48px)}
+.answer-results{display:flex;flex-direction:column;gap:12px;align-self:start}
+.answer-topic{display:flex;flex-direction:column;gap:10px;min-width:0}
+.answer-topic>p{font-size:17px;line-height:24px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.answer-icons{display:flex;gap:10px;flex-wrap:wrap}
+.answer-icon{display:grid;place-items:center;width:24px;height:24px;flex:0 0 24px;border-radius:50%}
+.answer-icon.right{background:#7ce64f}.answer-icon.wrong{background:#ff6170}
+.result-footer{position:fixed;bottom:0;left:0;right:0;z-index:4;height:104px;display:flex;justify-content:center;align-items:center;padding:24px;pointer-events:none}
+.result-footer>img{position:absolute;inset:0;width:100%;height:104px;object-fit:cover;pointer-events:none}
+.result-footer .button{width:240px;position:relative;pointer-events:auto}
+.tutor.reveal{transform:translateY(20px)}.tutor.reveal.shown{transform:translateY(0)}
+.result-details.shown .comparison-bar{animation:bar-fill .7s ease-out both}
+@keyframes bar-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+#stage[data-step="bonus"]{padding-top:48px;min-height:calc(100svh - 40px)}
+.bonus-screen{width:704px;max-width:100%;padding:0 32px;display:flex;flex-direction:column;align-items:center;gap:16px;color:#fff;text-align:center}
+.bonus-screen h1{width:100%;font-size:40px;line-height:46px}
+.coupon-card{width:330.133px;max-width:100%;padding:16px;border-radius:24px;background:#fff;color:#2f2f45;box-shadow:0 8px 18px #394e7f33;display:flex;flex-direction:column;gap:17px;align-items:center}
+.coupon-card>p{font-size:17px;line-height:24px;width:277px;max-width:100%}.coupon-card strong{color:#634ad6}
+.coupon-code{height:52px;width:100%;border-radius:16px;background:#f2f3f7;color:#634ad6;display:flex;align-items:center;justify-content:center;gap:10px;font-size:17px;line-height:24px}
+.coupon-use{width:100%;height:44px;border-radius:17px;font-size:15px;line-height:18px;color:#fff;background:#ff6170;padding:4px 16px}
+.coupon-use:hover{background:#f44b60}
+.bonus-chest{width:184px;height:139px;overflow:hidden;position:relative}
+.bonus-chest img{position:absolute;width:100%;height:131.84%;top:-18.39%;left:0}
+.bonus-screen>.button{height:59px}
+body[data-view="bonus"] .nav{height:40px;font-size:14px}
+body[data-view="bonus"] .logo{width:113px;height:18px;margin:0}
+body[data-view="bonus"] .nav-left{gap:24px}body[data-view="bonus"] .nav-links{gap:16px}
+body[data-view="bonus"] .header-icon{width:32px;height:32px}
+body[data-view="bonus"] .nav-avatar-frame{width:24px;height:24px}
+body[data-view="bonus"] .currency{height:32px;padding:0 10px}
+body[data-view="bonus"] .nav-right{gap:8px}
+body[data-view="bonus"] .access{height:32px;width:auto;margin-left:8px}
+@media(max-width:1120px){.nav,body[data-view="dashboard"] .nav{padding:4px 16px}.nav-left,body[data-view="dashboard"] .nav-left{gap:16px}.nav-links,body[data-view="dashboard"] .nav-links{gap:8px}.profile,body[data-view="dashboard"] .profile{position:static;transform:none}.nav-right{gap:8px}}
+@media(max-width:980px){.result-panel{padding:24px;gap:16px}.result-top{padding:0;gap:16px}.result-reward,.open-chests{width:320px;height:113.17px}.result-podium{left:340px}.tutor-copy{max-width:65%;left:0}.eyebrow{font-size:14px;white-space:normal}.tutor-copy h3{font-size:28px}.tutor-description{font-size:15px}.enrollment{left:0;width:65%}.phone-form{gap:12px}.signup{width:46%;font-size:18px}.phone-field input{font-size:19px}.teacher-photo{left:auto;right:-20px}.teacher-caption{left:auto;right:-10px;transform:none;font-size:9px}.tutor-success{left:0;width:65%}.comparison-card,.answer-results{padding:20px}.comparison-card h3,.answer-results h3{font-size:18px}.comparison-labels{width:94px;font-size:12px}.comparison-bars>div{font-size:12px}.answer-icons{gap:8px}.answer-topic>p{font-size:15px}}
+@media(max-width:800px){.nav-links{display:none}#stage[data-step="result"]{padding:24px 16px 110px}.result-top{height:auto;flex-wrap:wrap;justify-content:center;gap:24px}.result-summary{gap:20px}.result-podium{display:none}.result-panel{padding:24px 20px}.result-reward,.open-chests{width:410px;height:145px;max-width:100%}.tutor-card{height:470px;overflow:hidden}.tutor-copy{left:0;max-width:100%;right:0}.eyebrow{font-size:14px}.tutor-copy h3{font-size:30px}.tutor-description{font-size:16px}.enrollment{left:0;top:auto;bottom:10px;width:100%;z-index:2}.teacher-photo{top:140px;right:0;left:auto}.teacher-caption{top:340px;right:8px;z-index:1}.tutor-card:has(#phone-error:not([hidden])){height:495px}.tutor-success{left:0;top:150px;width:100%}.tutor-card:has(#tutor-success:not([hidden])){height:340px}.result-details{grid-template-columns:1fr;gap:24px}.answer-results{order:-1}.comparison-card{min-height:139px}.comparison-labels{width:109px;font-size:14px}.comparison-bars>div{font-size:14px}.comparison-bars{flex:none;width:260px;max-width:calc(100% - 113px)}.comparison-bar{max-width:calc(100% - 75px)}.answer-topic>p{font-size:17px}.answer-icons{gap:10px}.nav-right .access{display:none}}
+@media(max-width:740px){#stage{padding:48px 16px 70px}.reward-screen{width:100%;height:auto;max-width:640px;gap:24px}.reward-screen h1{font-size:30px;line-height:38px}.reward-art{width:294px;height:294px;transform:none;animation:rewardEntrance .7s both;margin:0}.parent-card,.parent-card.ready{width:100%;padding:24px 0 32px;gap:32px}.preparing-heading{width:100%}.preparing-heading h1{font-size:clamp(19px,4vw,28px);line-height:34px;white-space:normal}.ready .preparing-heading h1{font-size:32px;line-height:38px}.closed-chests{width:100%;height:auto;aspect-ratio:605/197}.parent-actions,.parent-card.ready .parent-actions{width:min(100%,512px);gap:24px}.parent-card .button{height:59px}.preparing{width:100%}.bonus-screen{padding:0;gap:16px}.bonus-screen h1{font-size:32px;line-height:38px}.bonus-screen>.button{width:100%}.rays img{transform:translate(-50%,-50%) scale(.8)}}
+@media(max-width:470px){.nav,body[data-view="dashboard"] .nav{padding:4px 12px;gap:8px}.nav-left,body[data-view="dashboard"] .nav-left{gap:0}.profile,body[data-view="dashboard"] .profile{margin-left:auto}.profile #nav-profile-name{display:none}.profile>.nav-avatar-frame{display:grid}.nav-right{gap:4px}.nav-right .extra-currency{display:none!important}.currency,body[data-view="dashboard"] .currency{padding:6px 8px}.logo{width:90px;height:16px;margin:0}.result-panel{padding:20px 16px;border-radius:24px}.result-summary h2{font-size:24px;line-height:28px}.statistics{width:100%;height:auto;min-height:196px;gap:8px;justify-content:space-between}.chart{transform:scale(.8);transform-origin:left center;margin-right:-43.2px;margin-bottom:0;flex:0 0 216px}.metrics{width:118px;gap:12px}.metric{height:52px;padding:8px;gap:5px;border-radius:16px}.metric-icon{width:30px;height:30px}.metric strong{font-size:22px;line-height:28px}.metric-value>span{font-size:12px}.result-top{gap:16px}.result-reward,.open-chests{width:100%;height:auto;aspect-ratio:410/145}.tutor-card{height:500px}.tutor-copy{top:16px}.eyebrow{font-size:12px;line-height:18px}.tutor-copy h3{font-size:26px;line-height:32px}.tutor-description{font-size:15px;line-height:22px}.teacher-photo{top:156px;right:-8px;left:auto;width:292px;height:262px}.teacher-caption{top:364px;font-size:9px;right:0}.enrollment{bottom:0}.phone-form{height:auto;min-height:112px;padding:10px;gap:10px;flex-direction:column;align-items:stretch}.phone-field label{font-size:13px;line-height:18px;margin-bottom:4px}.phone-field input{font-size:20px}.signup{width:100%;height:44px;font-size:18px}.legal{height:auto;min-height:36px}.legal p{font-size:9px;line-height:12px}.tutor-card:has(#phone-error:not([hidden])){height:524px}.tutor-card:has(#tutor-success:not([hidden])){height:360px}.tutor-success{top:160px}.tutor-success h3{font-size:22px}.tutor-success p{font-size:14px;line-height:20px}.comparison-card,.answer-results{padding:16px;border-radius:20px}.comparison-card h3,.answer-results h3{font-size:18px;line-height:24px}.comparison-labels{width:90px;font-size:12px}.comparison-bars{max-width:calc(100% - 94px)}.comparison-bars>div{font-size:11px;gap:3px}.comparison-bar{max-width:calc(100% - 61px)}.answer-topic>p{font-size:15px}.answer-icons{gap:7px}.answer-icon{width:24px;height:24px}.result-footer{height:96px;padding:20px}.result-footer>img{height:96px}.bonus-screen h1{font-size:27px;line-height:34px}.coupon-card{width:330px}.demo-controls{right:8px;bottom:6px}.demo-controls button{font-size:10px}}
+@media(max-width:370px){.statistics{flex-direction:column;gap:16px}.chart{transform:none;margin:0;flex-basis:auto}.metrics{width:100%;flex-direction:row;gap:6px}.metric{width:33.333%;padding:6px;gap:4px;flex-wrap:wrap;height:80px}.metric-value{gap:1px}.metric strong{font-size:20px}.metric-value>span{font-size:10px}.tutor-copy h3{font-size:24px}.tutor-description{font-size:14px}.comparison-labels{width:76px;font-size:10px}.comparison-bars{max-width:calc(100% - 80px)}}
+@media(max-width:470px){.tutor-card{height:560px}.tutor-card:has(#phone-error:not([hidden])){height:584px}.answer-icons{display:grid;grid-template-columns:repeat(10,24px);justify-content:space-between;gap:10px 0}}
+@media(max-width:370px){.answer-icons{grid-template-columns:repeat(8,24px)}}

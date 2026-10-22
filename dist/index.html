@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#35077e">
+  <meta name="description" content="Интерактивное демо итогов урока: награда, подготовка оценки и результаты.">
+  <title>Итоги урока — новая версия демо</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="parent-check.css">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="new-flow.css">
+  <script src="dashboard.js" defer></script>
+  <script src="flow-v2.js" defer></script>
+</head>
+<body data-view="dashboard" data-completed="false">
+  <header class="nav" aria-label="Учи.ру">
+    <div class="nav-left">
+      <img id="nav-logo" src="assets/v2-logo.svg" alt="Учи.ру" class="logo">
+      <div class="nav-links">
+        <span class="nav-item"><span class="header-icon"><img id="nav-quest-icon" src="assets/v2-quests.svg" alt=""><b class="badge" id="nav-quest-counter">1</b></span>Квесты</span>
+        <span class="nav-item"><span class="header-icon"><img id="nav-teacher-icon" src="assets/dashboard-imgGroup1321316219.svg" alt=""><b class="badge">1</b></span>От учителя</span>
+      </div>
+    </div>
+    <div class="profile"><span class="nav-avatar-frame"><img id="nav-avatar" src="assets/reward-imgAvatarRaccoon.svg" alt=""></span><span id="nav-profile-name">Константин К.</span><img src="assets/reward-imgExpandMore.svg" alt=""></div>
+    <div class="nav-right">
+      <span class="currency"><span class="header-egg"><img src="assets/reward-imgGroup.svg" alt=""><img src="assets/reward-imgGroup1.svg" class="egg-spots" alt=""></span><span id="egg-balance">1576</span></span>
+      <span class="currency extra-currency"><img src="assets/reward-img1.svg" alt="Кристаллы"><span id="nav-gems-value">10</span></span>
+      <span class="currency extra-currency"><img id="nav-coins-icon" src="assets/v2-coins.svg" alt="Монеты"><span id="nav-coins-value">1734</span></span>
+      <span class="access"><img src="assets/reward-imgTrolley.svg" alt="">Полный доступ</span>
+    </div>
+  </header>
+  <main id="stage" data-step="dashboard">
+    <section id="dashboard-screen" class="screen dashboard-screen" aria-labelledby="dashboard-title">
+      <div class="dashboard-page-heading">
+        <button id="dashboard-back" class="dashboard-back" aria-label="Назад к началу страницы"><img src="assets/dashboard-imgExpandBackBoldArrow.svg" alt=""></button>
+        <h1 id="dashboard-title" tabindex="-1">Математика</h1>
+      </div>
+      <div class="dashboard-tabs-shell">
+        <div class="dashboard-tabs" id="dashboard-tabs" aria-label="Разделы математики" tabindex="0">
+          <span class="dashboard-tab selected">Числа и величины</span><span class="dashboard-tab">Сложение и вычитание</span><span class="dashboard-tab">Умножение и деление</span><span class="dashboard-tab">Умножение и деление</span><span class="dashboard-tab last">Уравнения</span>
+        </div>
+        <button id="dashboard-tabs-next" class="dashboard-tabs-next" aria-label="Прокрутить разделы вправо"><img src="assets/dashboard-imgExpandBackBoldArrow1.svg" alt=""></button>
+      </div>
+      <aside class="grades-sidebar" aria-labelledby="grades-title">
+        <div class="grades-panel">
+          <div class="grades-panel-main">
+            <h2 id="grades-title">Твои оценки</h2>
+            <div class="grades-scroll" id="grades-scroll" tabindex="0" aria-label="Оценки по разделам, прокручиваемая панель">
+              <details class="grades-section" open>
+                <summary><img src="assets/dashboard-imgExpandMore.svg" alt=""><span>Числа и величины</span></summary>
+                <div class="grades-section-content" id="grades-topic-list"></div>
+              </details>
+              <details class="grades-section"><summary><img src="assets/dashboard-imgExpandMore.svg" alt=""><span>Сложение и вычитание</span></summary><div class="grades-empty">Здесь появятся оценки после прохождения уроков.</div></details>
+              <details class="grades-section"><summary><img src="assets/dashboard-imgExpandMore.svg" alt=""><span>Умножение и деление</span></summary><div class="grades-empty">Здесь появятся оценки после прохождения уроков.</div></details>
+              <details class="grades-section"><summary><img src="assets/dashboard-imgExpandMore.svg" alt=""><span>Уравнения</span></summary><div class="grades-empty">Здесь появятся оценки после прохождения уроков.</div></details>
+            </div>
+          </div>
+          <div class="grades-promo" id="dashboard-tutor-promo" hidden><p>Исправь ошибки<br>с репетитором</p><button id="dashboard-tutor-details">Подробнее</button></div>
+        </div>
+      </aside>
+      <div class="curriculum-path" aria-hidden="true"><img src="assets/dashboard-imgSideLine.svg" alt=""></div>
+      <div class="curriculum">
+        <h2 class="curriculum-category">Числа и величины</h2>
+        <div id="lesson-modules"></div>
+      </div>
+    </section>
+
+    <div class="rays" aria-hidden="true"><img src="assets/v2-rays.svg" alt=""></div>
+    <section id="reward-screen" class="screen reward-screen" aria-labelledby="reward-title" hidden>
+      <h1 id="reward-title" tabindex="-1">Получилось! Урок пройден</h1>
+      <div class="reward-art" role="img" aria-label="Награда: 5 яиц"><img src="assets/v2-reward-eggs.svg" alt=""><span class="reward-counter">5</span></div>
+      <button id="learn-grade" class="button white">Узнать оценку →</button>
+    </section>
+    <section id="parent-screen" class="screen parent-card" aria-labelledby="parent-title" hidden>
+      <div class="preparing-heading"><button id="grade-voice" type="button" aria-label="Прослушать приглашение"><img src="assets/v2-sound.svg" alt=""></button><h1 id="parent-title" tabindex="-1">Посмотри оценку с родителем</h1></div>
+      <div class="closed-chests"><img src="assets/v2-chests-closed.png" alt="Три сундука с оценками 3, 5 и 4"></div>
+      <div class="parent-actions">
+        <div id="preparing" class="preparing"><div id="grade-progress" class="grade-progress" role="progressbar" aria-label="Подготовка оценки" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"><span id="progress-fill" class="progress-fill"></span><span id="progress-percent">0%</span></div></div>
+        <button id="open-result" class="button open-grade" hidden>Открыть</button>
+        <button id="later" class="button white">Посмотрю потом</button>
+      </div>
+    </section>
+    <section id="result-screen" class="screen results" aria-labelledby="result-title" hidden>
+      <div class="result-panel">
+        <div class="result-summary">
+          <h2 id="result-title" tabindex="-1">Итоги урока</h2>
+          <div class="result-top">
+            <img class="result-podium" src="assets/v2-podium.svg" alt="">
+            <div class="statistics reveal" id="statistics">
+              <div class="chart" role="img" aria-label="Оценка 4, хорошо. 23 верных ответа и 4 ошибки.">
+                <img class="chart-base" src="assets/v2-chart-base.svg" alt="">
+                <div id="chart-reveal" class="chart-reveal"><div class="green-ring"><img src="assets/v2-chart-green.svg" alt=""></div><div class="red-ring"><img src="assets/v2-chart-red.svg" alt=""></div></div>
+                <div class="grade" id="grade"><strong>4</strong><span>Хорошо</span></div>
+              </div>
+              <div class="metrics"><div class="metric time"><span class="metric-icon"><img src="assets/v2-time.svg" alt=""></span><span class="metric-value"><strong id="minutes">0</strong><span>минут</span></span></div><div class="metric correct"><span class="metric-icon"><img src="assets/v2-check.svg" alt=""></span><span class="metric-value"><strong id="correct">0</strong><span>верно</span></span></div><div class="metric errors"><span class="metric-icon"><img src="assets/v2-error.svg" alt=""></span><span class="metric-value"><strong id="errors">0</strong><span>ошибки</span></span></div></div>
+            </div>
+            <div id="result-reward" class="result-reward reveal"><div class="open-chests"><img src="assets/v2-chests-open.png" alt="Открытый сундук с оценкой 4 и сундуки с оценками 5 и 3"></div></div>
+          </div>
+        </div>
+        <div class="result-content">
+          <aside id="tutor" class="tutor reveal" aria-label="Рекомендация репетитора" inert>
+            <div class="tutor-card">
+              <div class="tutor-copy"><p class="eyebrow">3 БЕСПЛАТНЫХ ЗАНЯТИЯ С РЕПЕТИТОРОМ УЧИ.РУ</p><h3>Поможем учиться на 5!</h3><p class="tutor-description">Разберем сложные темы, отработаем ошибки</p></div>
+              <div id="teacher-photo" class="teacher-photo"><img src="assets/v2-teacher.png" alt="Репетитор Васильева И."></div>
+              <span class="teacher-caption">Васильева И., математика, стаж 27 лет</span>
+              <div class="enrollment">
+                <form id="tutor-form" class="phone-form" novalidate><div class="phone-field"><label for="phone">Телефон родителя</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="+7 (___) ___-__-__" aria-describedby="phone-error" required></div><button class="button signup" type="submit">Записаться</button></form>
+                <p id="phone-error" class="phone-error" role="alert" hidden>Введите номер телефона полностью</p>
+                <div class="legal"><p>Нажимая «Записаться», я <u>соглашаюсь на передачу</u> персональных данных в ООО «ПРЕПРЕП.РУ» и принимаю <u>пользовательскую документацию</u></p><span class="ad">Реклама<img src="assets/v2-ad.svg" alt=""></span></div>
+              </div>
+              <div id="tutor-success" class="tutor-success" hidden><div role="status" aria-live="polite"><img src="assets/submitted-check.svg" alt=""><h3 id="tutor-success-title" tabindex="-1">Заявка отправлена!</h3><p>Мы свяжемся с вами в ближайшее время, чтобы подобрать удобное время занятия</p></div><div><p>Ввели данные неверно?</p><button type="button" id="tutor-retry">Запишитесь ещё раз</button></div></div>
+            </div>
+          </aside>
+          <div class="result-details reveal" id="result-details"><div class="comparison-cards"><article class="comparison-card"><h3>На 27% больше заданий без ошибок</h3><div class="comparison-chart"><div class="comparison-labels"><span>Ваш ребенок</span><span>Другие ученики</span></div><div class="comparison-bars"><div><span class="comparison-bar green" style="--bar-width:177px"></span><span>20 заданий</span></div><div><span class="comparison-bar other" style="--bar-width:67px"></span><span>10 заданий</span></div></div></div></article><article class="comparison-card"><h3>Делает на 35% меньше ошибок</h3><div class="comparison-chart"><div class="comparison-labels"><span>Ваш ребенок</span><span>Другие ученики</span></div><div class="comparison-bars"><div><span class="comparison-bar red" style="--bar-width:52px"></span><span>3 ошибки</span></div><div><span class="comparison-bar other" style="--bar-width:181px"></span><span>10 ошибок</span></div></div></div></article><article class="comparison-card"><h3>Решает карточку на 87% быстрее</h3><div class="comparison-chart"><div class="comparison-labels"><span>Ваш ребенок</span><span>Другие ученики</span></div><div class="comparison-bars"><div><span class="comparison-bar green" style="--bar-width:67px"></span><span>3 мин</span></div><div><span class="comparison-bar other" style="--bar-width:207px"></span><span>20 мин</span></div></div></div></article></div><article class="answer-results"><h3>Результаты карточек</h3><div class="answer-topic"><p title="Порядковые числительные">Порядковые числительные</p><div class="answer-icons" aria-label="8 верных, 2 ошибок"><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span></div></div><div class="answer-topic"><p title="Сочетательное свойство умножения">Сочетательное свойство умножения</p><div class="answer-icons" aria-label="8 верных, 2 ошибок"><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span></div></div><div class="answer-topic"><p title="Сравнение значений числовых выражений">Сравнение значений числовых выражений</p><div class="answer-icons" aria-label="8 верных, 0 ошибок"><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span></div></div><div class="answer-topic"><p title="Выбери, как записать, сколько кристаллов">Выбери, как записать, сколько кристаллов</p><div class="answer-icons" aria-label="6 верных, 1 ошибок"><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span></div></div></article></div>
+        </div>
+      </div>
+      <div id="result-footer" class="result-footer reveal"><img src="assets/v2-footer.png" alt=""><button id="continue" class="button white">Продолжить</button></div>
+    </section>
+    <section id="bonus-screen" class="screen bonus-screen" aria-labelledby="bonus-title" hidden>
+      <h1 id="bonus-title" tabindex="-1">Дополнительная награда</h1>
+      <div class="coupon-card"><p>Ты получаешь <strong>скидку 20%</strong><br>на любые занятия!</p><button id="copy-coupon" class="coupon-code" type="button" aria-label="Скопировать ПРОМОКОД375"><span id="copy-coupon-label">ПРОМОКОД375</span><img src="assets/v2-copy.svg" alt=""></button><button id="use-coupon" class="button coupon-use">Использовать промокод</button></div>
+      <div class="bonus-chest"><img src="assets/v2-bonus-chest.png" alt="Фиолетовый сундук с дополнительной наградой"></div>
+      <button id="bonus-continue" class="button white">Продолжить</button>
+      <p id="coupon-status" class="sr-only" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <footer class="demo-controls"><button id="restart" aria-label="Повторить демо сначала">↻ Повторить демо</button></footer>
+  <div id="progress-status" class="sr-only" role="status" aria-live="polite"></div>
+  <dialog id="parent-check" class="parent-check" aria-labelledby="parent-check-title" aria-describedby="parent-check-description">
+    <button id="parent-check-close" type="button" class="parent-check-close" aria-label="Закрыть проверку для родителя"><img src="assets/parent-check-imgClose.svg" alt=""></button>
+    <form id="parent-check-form" class="parent-check-form" novalidate>
+      <div class="parent-check-message">
+        <div class="parent-illustration"><img src="assets/parent-check-imgGrisha.svg" alt="Дракоша Гриша с карточками чисел"></div>
+        <div class="parent-check-copy">
+          <div class="parent-check-header">
+            <button id="parent-check-voice" class="parent-check-voice" type="button" aria-label="Прослушать задание"><img src="assets/parent-check-imgIconPack.svg" alt=""></button>
+            <h2 id="parent-check-title">Решите пример для отправки номера телефона</h2>
+          </div>
+          <p id="parent-check-description">Записаться на мастер-класс можно только со взрослым</p>
+        </div>
+      </div>
+      <div class="parent-equation">
+        <label for="parent-answer">27 + 36 =</label>
+        <input id="parent-answer" name="parent-answer" type="text" inputmode="numeric" autocomplete="off" placeholder="Ответ" aria-label="Ответ на пример 27 плюс 36" aria-describedby="parent-answer-error" autofocus>
+        <p id="parent-answer-error" class="parent-answer-error" role="alert" hidden></p>
+      </div>
+      <button class="button primary parent-check-submit" type="submit">Проверить ответ</button>
+    </form>
+  </dialog>
+
+  <dialog id="demo-dialog" aria-labelledby="dialog-title"><button id="close-dialog" class="dialog-close" aria-label="Закрыть">×</button><h2 id="dialog-title"></h2><p id="dialog-description"></p><button id="dialog-action" class="button primary"></button></dialog>
+</body>
+</html>
