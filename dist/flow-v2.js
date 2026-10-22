@@ -34,7 +34,8 @@ function setHeader(bonus){
 function showScreen(id,step,title){
   screens.forEach(screen=>{$(screen).hidden=screen!==id;});
   $('stage').dataset.step=step;
-  document.body.dataset.view=step==='dashboard'?'dashboard':step==='bonus'?'bonus':'lesson';
+  document.body.dataset.view=step==='dashboard'?'dashboard':step==='bonus'?'bonus':step==='result'?'analytics':'lesson';
+  if(step==='result')$('analytics-scroll').scrollTop=0;
   setHeader(step==='bonus');
   $(title).focus({preventScroll:true});
   window.scrollTo({top:0,behavior:'instant'});
