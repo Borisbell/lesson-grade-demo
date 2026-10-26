@@ -217,12 +217,11 @@ function applyResult(kind){
 }
 function toggleTaskDetails(expanded){
   $('lesson-task-details').hidden=!expanded;$('toggle-lesson-details').setAttribute('aria-expanded',String(expanded));
-  $('toggle-lesson-details').textContent='Подробнее';
+  $('toggle-lesson-details').textContent=expanded?'Скрыть':'Подробнее';
 }
 function updateTeacherScale(){const width=$('teacher-photo').clientWidth;if(width)$('teacher-photo').style.setProperty('--teacher-scale',String(width/550));}
 function openSignup(){resetTutorForm();$('signup-dialog').showModal();$('phone').focus();}
 $('toggle-lesson-details').addEventListener('click',()=>toggleTaskDetails($('lesson-task-details').hidden));
-$('hide-lesson-details').addEventListener('click',()=>{toggleTaskDetails(false);$('toggle-lesson-details').focus();});
 $('masterclass-signup').addEventListener('click',openSignup);
 $('signup-close').addEventListener('click',()=>$('signup-dialog').close());
 window.addEventListener('resize',updateTeacherScale);
