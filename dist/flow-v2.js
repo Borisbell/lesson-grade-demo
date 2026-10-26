@@ -2,7 +2,8 @@
 const $ = id => document.getElementById(id);
 const screens=['dashboard-screen','reward-screen','parent-screen','result-screen','bonus-screen'];
 const resultParts=['statistics','grade','result-reward','tutor','result-details','result-footer'];
-const metrics=[['minutes',18],['correct',23],['errors',4]];
+let resultKind='excellent';
+let metrics=[['minutes',6],['correct',96]];
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let run=0,frame=0,ready=false,parentVerified=false,hasLessonResult=false,dialogAction=()=>{};
 function animate(duration,update,token=run){
@@ -35,7 +36,7 @@ function showScreen(id,step,title){
   screens.forEach(screen=>{$(screen).hidden=screen!==id;});
   $('stage').dataset.step=step;
   document.body.dataset.view=step==='dashboard'?'dashboard':step==='bonus'?'bonus':step==='result'?'analytics':'lesson';
-  if(step==='result')$('analytics-scroll').scrollTop=0;
+  if(step==='result'){$('analytics-scroll').scrollTop=0;updateTeacherScale();}
   setHeader(step==='bonus');
   $(title).focus({preventScroll:true});
   window.scrollTo({top:0,behavior:'instant'});
@@ -49,14 +50,14 @@ function resetResults(){
   $('tutor').inert=true;
   metrics.forEach(([id])=>$(id).textContent='0');
   $('chart-reveal').style.maskImage='conic-gradient(from 0deg,#000 0deg,transparent 0deg)';
-  resetTutorForm();
+  resetTutorForm();toggleTaskDetails(false);$('result-screen').style.setProperty('--metric-progress','0');
 }
 function clearParentError(){
   $('parent-answer-error').hidden=true;$('parent-answer-error').textContent='';$('parent-answer').removeAttribute('aria-invalid');
 }
 function returnToMath(){
   run++;cancelAnimationFrame(frame);
-  $('demo-dialog').close();$('parent-check').close();
+  $('demo-dialog').close();$('parent-check').close();$('signup-dialog').close();
   ready=false;parentVerified=false;
   $('parent-answer').value='';clearParentError();resetResults();
   resetDashboard(hasLessonResult);
@@ -66,7 +67,7 @@ function restart(){hasLessonResult=false;returnToMath();}
 function beginLessonResult(){
   if($('stage').dataset.step!=='dashboard')return;
   run++;cancelAnimationFrame(frame);ready=false;parentVerified=false;resetResults();
-  showScreen('reward-screen','reward','reward-title');
+  applyResult('excellent');showScreen('reward-screen','reward','reward-title');
 }
 async function prepareGrade(){
   if($('stage').dataset.step!=='reward')return;
@@ -108,24 +109,27 @@ async function openResults(){
     const eased=1-Math.pow(1-p,2.3),angle=eased*360;
     $('chart-reveal').style.maskImage=`conic-gradient(from 0deg,#000 ${angle}deg,transparent ${angle}deg)`;
     metrics.forEach(([id,value])=>$(id).textContent=String(Math.round(value*eased)));
+    $('result-screen').style.setProperty('--metric-progress',String(eased));
   },token))return;
   reveal('grade');
-  $('progress-status').textContent='Оценка 4, хорошо. 18 минут, 23 верных ответа, 4 ошибки.';
+  $('progress-status').textContent='Оценка 4,8. Правильность 96%, время 6 минут.';
   if(!await pause(reducedMotion?60:850,token))return;
   reveal('result-reward');
   if(!await pause(reducedMotion?60:1100,token))return;
   ['tutor','result-details','result-footer'].forEach(reveal);
   $('tutor').inert=false;hasLessonResult=true;
-  $('progress-status').textContent='Итоги готовы. Доступны три бесплатных занятия с репетитором и подробные результаты карточек.';
+  $('progress-status').textContent='Итоги готовы. Раскройте статистику по заданиям или запишитесь на бесплатный мастер-класс.';
 }
-function openCalculatedResult(){
+function openCalculatedResult(kind='excellent'){
   if(!hasLessonResult||!['dashboard','bonus'].includes($('stage').dataset.step))return;
+  applyResult(kind);
   run++;cancelAnimationFrame(frame);
   showScreen('result-screen','result','result-title');resultParts.forEach(reveal);
   metrics.forEach(([id,value])=>$(id).textContent=String(value));
+  $('result-screen').style.setProperty('--metric-progress','1');
   $('chart-reveal').style.maskImage='conic-gradient(from 0deg,#000 360deg,transparent 360deg)';
   $('tutor').inert=false;
-  $('progress-status').textContent='Оценка 4, хорошо. 18 минут, 23 верных ответа, 4 ошибки.';
+  $('progress-status').textContent=resultKind==='support'?'Оценка 3,2. Правильность 60%, время 8 минут.':'Оценка 4,8. Правильность 96%, время 6 минут.';
 }
 function openBonus(){
   run++;cancelAnimationFrame(frame);
@@ -140,7 +144,12 @@ function speak(text){
   if(!('speechSynthesis' in window)||typeof SpeechSynthesisUtterance==='undefined')return;
   window.speechSynthesis.cancel();const speech=new SpeechSynthesisUtterance(text);speech.lang='ru-RU';window.speechSynthesis.speak(speech);
 }
-$('lesson-modules').addEventListener('click',event=>{if(event.target.closest('[data-start-lesson]'))beginLessonResult();});
+$('lesson-modules').addEventListener('click',event=>{
+  if(event.target.closest('[data-start-lesson]'))beginLessonResult();
+  else if(event.target.closest('[data-open-result]'))openCalculatedResult('excellent');
+  else if(event.target.closest('[data-open-support]')){openCalculatedResult('support');toggleTaskDetails(true);}
+  else if(event.target.closest('[data-section-signup]')){openCalculatedResult('support');toggleTaskDetails(true);openSignup();}
+});
 $('learn-grade').addEventListener('click',prepareGrade);
 $('open-result').addEventListener('click',openParentCheck);
 $('parent-check-close').addEventListener('click',closeParentCheck);
@@ -161,13 +170,13 @@ $('restart').addEventListener('click',restart);
 $('later').addEventListener('click',openBonus);
 $('continue').addEventListener('click',openBonus);
 $('bonus-continue').addEventListener('click',returnToMath);
-$('dashboard-tutor-details').addEventListener('click',openCalculatedResult);
+$('dashboard-tutor-details').addEventListener('click',()=>openCalculatedResult());
 $('copy-coupon').addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText('ПРОМОКОД375');$('copy-coupon-label').textContent='Скопировано!';$('coupon-status').textContent='Промокод скопирован';}
   catch{openDialog('ПРОМОКОД375','Скидка 20% на любые занятия. Сохраните промокод, чтобы использовать его позже.','Понятно',()=>$('demo-dialog').close());}
 });
 $('use-coupon').addEventListener('click',()=>{
-  if(hasLessonResult){openCalculatedResult();$('phone').focus();$('progress-status').textContent='Промокод ПРОМОКОД375 выбран. Запишитесь на занятие с репетитором.';}
+  if(hasLessonResult){openCalculatedResult(resultKind);openSignup();$('progress-status').textContent='Промокод ПРОМОКОД375 выбран. Запишитесь на занятие с репетитором.';}
   else openDialog('Скидка 20% на занятия','Твой промокод — ПРОМОКОД375. Сохрани его, чтобы использовать при выборе занятий.','Вернуться к урокам',returnToMath);
 });
 $('close-dialog').addEventListener('click',()=>$('demo-dialog').close());
@@ -186,8 +195,35 @@ $('tutor-form').addEventListener('submit',event=>{
   event.preventDefault();
   if($('phone').value.replace(/\D/g,'').length!==11){$('phone-error').hidden=false;$('phone').setAttribute('aria-invalid','true');$('phone').focus();return;}
   $('phone-error').hidden=true;$('phone').removeAttribute('aria-invalid');
-  $('tutor-form').hidden=true;$('teacher-photo').hidden=true;$('tutor-success').hidden=false;
+  $('tutor-form').hidden=true;$('tutor-success').hidden=false;
   $('tutor-success-title').focus({preventScroll:true});
 });
 $('tutor-retry').addEventListener('click',()=>{resetTutorForm();$('phone').focus();});
-setHeader(false);
+function applyResult(kind){
+  resultKind=kind==='support'?'support':'excellent';const bad=resultKind==='support';
+  metrics=[['minutes',bad?8:6],['correct',bad?60:96]];
+  $('result-screen').dataset.resultKind=resultKind;
+  $('score-value').textContent=bad?'3,2':'4,8';$('score-caption').hidden=bad;
+  $('lesson-score').setAttribute('aria-label',bad?'Оценка 3,2':'Оценка 4,8, хорошо');
+  const prefix=bad?'bad':'good';
+  $('score-main-arc').src='assets/oct26-'+prefix+'-imgEllipse8334.svg';
+  $('score-other-arc').src='assets/oct26-'+prefix+'-imgEllipse8333.svg';
+  $('correct-icon').innerHTML='<img src="assets/oct26-'+prefix+'-imgFrame.svg" alt="">';
+  $('speed-icon').innerHTML='<img src="assets/oct26-'+prefix+'-imgFrame1.svg" alt="">';
+  $('correct-status').textContent=bad?'Ниже среднего':'Выше среднего';$('speed-status').textContent=bad?'Нормальная':'Быстрее среднего';
+  $('excellent-recommendation').hidden=bad;$('support-recommendation').hidden=!bad;
+  $('lesson-task-list').innerHTML=[0,1,2].map((_,i)=>{const n=bad?5:i===1?8:10;return '<article class="lesson-task"><img src="assets/oct26-'+(bad?'bad-img':i===1?'good-img1':'good-img')+'.png" alt="Превью задания"><div class="lesson-task-content"><h4>'+(bad?'Вычитание':'Сложение')+' в пределах 20</h4><div class="lesson-task-accuracy"><span>Правильно</span><span class="task-track"><i style="--task-value:'+n*10+'%"></i></span><strong>'+n+' из 10</strong></div><p class="lesson-task-time"><span>Время</span><strong>2 мин</strong></p></div></article>';}).join('');
+  toggleTaskDetails(false);resetTutorForm();updateTeacherScale();
+}
+function toggleTaskDetails(expanded){
+  $('lesson-task-details').hidden=!expanded;$('toggle-lesson-details').setAttribute('aria-expanded',String(expanded));
+  $('toggle-lesson-details').textContent='Подробнее';
+}
+function updateTeacherScale(){const width=$('teacher-photo').clientWidth;if(width)$('teacher-photo').style.setProperty('--teacher-scale',String(width/550));}
+function openSignup(){resetTutorForm();$('signup-dialog').showModal();$('phone').focus();}
+$('toggle-lesson-details').addEventListener('click',()=>toggleTaskDetails($('lesson-task-details').hidden));
+$('hide-lesson-details').addEventListener('click',()=>{toggleTaskDetails(false);$('toggle-lesson-details').focus();});
+$('masterclass-signup').addEventListener('click',openSignup);
+$('signup-close').addEventListener('click',()=>$('signup-dialog').close());
+window.addEventListener('resize',updateTeacherScale);
+applyResult('excellent');setHeader(false);

@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="dashboard.css">
   <link rel="stylesheet" href="new-flow.css">
   <link rel="stylesheet" href="analytics.css">
+  <link rel="stylesheet" href="lesson-update.css">
   <script src="dashboard.js" defer></script>
   <script src="flow-v2.js" defer></script>
 </head>
@@ -82,53 +83,27 @@
         <button id="later" class="button white">Посмотрю потом</button>
       </div>
     </section>
-    <section id="result-screen" class="screen results analytics-screen" aria-labelledby="result-title" hidden>
-      <div class="analytics-layout">
-        <div id="analytics-scroll" class="analytics-left" tabindex="0" aria-label="Аналитика урока, прокручиваемая панель">
-          <div class="result-summary">
-            <h2 id="result-title" tabindex="-1">Итоги урока</h2>
-            <div class="result-top">
-              <div class="statistics reveal" id="statistics">
-                <div class="chart" role="img" aria-label="Оценка 4, хорошо. 23 верных ответа и 4 ошибки.">
-                  <img class="chart-base" src="assets/analytics-chart-base.svg" alt="">
-                  <div id="chart-reveal" class="chart-reveal"><div class="green-ring"><img src="assets/analytics-chart-green.svg" alt=""></div><div class="red-ring"><img src="assets/analytics-chart-red.svg" alt=""></div></div>
-                  <div class="grade" id="grade"><strong>4</strong><span>Хорошо</span></div>
-                </div>
-                <div class="metrics"><div class="metric time"><span class="metric-icon"><img src="assets/analytics-time.svg" alt=""></span><span class="metric-value"><strong id="minutes">0</strong><span>минут</span></span></div><div class="metric correct"><span class="metric-icon"><img src="assets/analytics-check.svg" alt=""></span><span class="metric-value"><strong id="correct">0</strong><span>верно</span></span></div><div class="metric errors"><span class="metric-icon"><img src="assets/analytics-error.svg" alt=""></span><span class="metric-value"><strong id="errors">0</strong><span>ошибки</span></span></div></div>
-              </div>
-              <div id="result-reward" class="result-reward reveal" aria-label="Награда: 25 яиц">
-                <div class="analytics-reward-label"><div class="analytics-eggs"><img src="assets/analytics-eggs.svg" alt=""><span>25</span></div></div>
-                <img class="analytics-reward-arrow" src="assets/analytics-arrow.svg" alt="">
-                <img class="analytics-chest" src="assets/analytics-chest.png" alt="Открытый сундук с оценкой 4">
-              </div>
-            </div>
-          </div>
-          <div class="result-details reveal" id="result-details">
-            <article class="analysis-card"><div class="analysis-intro"><h3>Хорошо получается</h3><p>Большинство заданий решены верно, но из-за спешки допускаешь ошибки. Можно улучшить!</p></div><div class="comparison-cards"><article class="comparison-card"><h3>На 27% больше верных ответов</h3><div class="comparison-chart"><div class="comparison-labels"><span>Ваш ребенок</span><span>Другие ученики</span></div><div class="comparison-bars"><div><span class="comparison-bar green" style="--bar-width:235px"></span><span>20 заданий</span></div><div><span class="comparison-bar other" style="--bar-width:131px"></span><span>17 заданий</span></div></div></div></article><article class="comparison-card"><h3>На 35% больше ошибок</h3><div class="comparison-chart"><div class="comparison-labels"><span>Ваш ребенок</span><span>Другие ученики</span></div><div class="comparison-bars"><div><span class="comparison-bar red" style="--bar-width:172px"></span><span>5 ошибок</span></div><div><span class="comparison-bar other" style="--bar-width:87px"></span><span>3 ошибок</span></div></div></div></article><article class="comparison-card"><h3>Скорость решения на 15% быстрее</h3><div class="comparison-chart"><div class="comparison-labels"><span>Ваш ребенок</span><span>Другие ученики</span></div><div class="comparison-bars"><div><span class="comparison-bar green" style="--bar-width:67px"></span><span>3 мин</span></div><div><span class="comparison-bar other" style="--bar-width:247px"></span><span>20мин</span></div></div></div></article></div></article>
-            <article class="answer-results"><h3>Результаты карточек</h3><div class="answer-topic"><p title="Порядковые числительные">Порядковые числительные</p><div class="answer-icons" aria-label="8 верных, 2 ошибок"><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span></div></div><div class="answer-topic"><p title="Сочетательное свойство умножения">Сочетательное свойство умножения</p><div class="answer-icons" aria-label="8 верных, 2 ошибок"><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span></div></div><div class="answer-topic"><p title="Сравнение значений числовых выражений">Сравнение значений числовых выражен...</p><div class="answer-icons" aria-label="8 верных, 0 ошибок"><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span></div></div><div class="answer-topic"><p title="Выбери, как записать, сколько кристаллов">Выбери, как записать, сколько крист...</p><div class="answer-icons" aria-label="6 верных, 1 ошибок"><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon wrong"><img src="assets/v2-error-small.svg" alt="Ошибка"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span><span class="answer-icon right"><img src="assets/v2-check-small.svg" alt="Верно"></span></div></div></article>
-          </div>
-        </div>
-        <aside id="tutor" class="tutor reveal" aria-label="Рекомендация репетитора" inert>
-          <div class="tutor-card">
-            <div class="tutor-copy"><p class="eyebrow">3 БЕСПЛАТНЫХ ЗАНЯТИЯ С РЕПЕТИТОРОМ УЧИ.РУ</p><h3>Поможем учиться на 5!</h3><p class="tutor-description">Разберем сложные темы, отработаем ошибки</p></div>
-            <div id="teacher-photo" class="teacher-photo"><img src="assets/analytics-teacher.png" alt="Репетитор Васильева Иннеса"></div>
-            <div class="teacher-caption"><strong>Васильева Иннеса</strong><div><span>Математика</span><span>Стаж 12 лет</span></div></div>
-            <div class="enrollment">
-                <form id="tutor-form" class="phone-form" novalidate><div class="phone-field"><label for="phone">Телефон родителя</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="+7 (___) ___-__-__" aria-describedby="phone-error" required></div><button class="button signup" type="submit">Записаться</button></form>
-                <p id="phone-error" class="phone-error" role="alert" hidden>Введите номер телефона полностью</p>
-                <div class="legal"><p>Нажимая «Записаться», я <u>соглашаюсь на передачу</u> персональных данных в ООО «ПРЕПРЕП.РУ» и принимаю <u>пользовательскую документацию</u></p><span class="ad">Реклама<img src="assets/v2-ad.svg" alt=""></span></div>
-              </div>
-
-            <div id="tutor-success" class="tutor-success" hidden><div role="status" aria-live="polite"><img src="assets/submitted-check.svg" alt=""><h3 id="tutor-success-title" tabindex="-1">Заявка отправлена!</h3><p>Мы свяжемся с вами в ближайшее время, чтобы подобрать удобное время занятия</p></div><div><p>Ввели данные неверно?</p><button type="button" id="tutor-retry">Запишитесь ещё раз</button></div></div>
-          </div>
-        </aside>
-      </div>
-      <div id="result-footer" class="result-footer reveal"><img src="assets/analytics-footer.png" alt=""><button id="continue" class="button white">Продолжить</button></div>
-    </section>
+    <section id="result-screen" class="screen lesson-analytics" aria-labelledby="result-title" hidden>
+  <div class="lesson-analytics-layout">
+    <article class="lesson-statistics" id="analytics-scroll">
+      <h2 id="result-title" tabindex="-1">Урок 3: сложение и вычитание</h2>
+      <div id="statistics" class="reveal"><div class="lesson-score-row">
+        <div class="lesson-score" role="img" id="lesson-score" aria-label="Оценка 4,8, хорошо"><span class="score-base"><img src="assets/oct26-good-imgEllipse8332.svg" alt=""></span><div id="chart-reveal" class="score-reveal"><span class="score-arc"><img id="score-main-arc" src="assets/oct26-good-imgEllipse8334.svg" alt=""></span><span class="score-secondary"><img id="score-other-arc" src="assets/oct26-good-imgEllipse8333.svg" alt=""></span></div><div id="grade" class="grade"><strong id="score-value">4,8</strong><span id="score-caption">Хорошо</span></div></div>
+        <div class="lesson-divider"></div><div id="result-reward" class="lesson-eggs reveal" aria-label="Награда: 30 яиц"><div class="lesson-eggs-art"><img src="assets/oct26-good-imgGroup2043682882.svg" alt=""><strong>30</strong></div><p>Награда за урок</p></div>
+      </div><div class="lesson-metrics"><div class="lesson-metric"><div class="lesson-metric-heading"><h3><span class="lesson-metric-icon" id="correct-icon"><img src="assets/oct26-good-imgFrame.svg" alt=""></span>Правильность</h3><span class="metric-status" id="correct-status">Выше среднего</span></div><div class="metric-comparison"><span>Ваш ребёнок</span><span class="metric-track"><i id="correct-fill" class="metric-fill child-fill"></i></span><strong><span id="correct">0</span>%</strong><span>Другие ученики</span><span class="metric-track"><i class="metric-fill peer-fill" style="width:72%"></i></span><strong>72%</strong></div></div><div class="lesson-metric"><div class="lesson-metric-heading"><h3><span class="lesson-metric-icon" id="speed-icon"><img src="assets/oct26-good-imgFrame1.svg" alt=""></span>Скорость</h3><span class="metric-status" id="speed-status">Быстрее среднего</span></div><div class="metric-comparison"><span>Ваш ребёнок</span><span class="metric-track"><i id="speed-fill" class="metric-fill child-fill"></i></span><strong><span id="minutes">0</span> мин</strong><span>Другие ученики</span><span class="metric-track"><i class="metric-fill peer-fill" style="width:100%"></i></span><strong>8 мин</strong></div></div></div></div>
+      <div id="result-details" class="reveal"><button type="button" id="toggle-lesson-details" class="button lesson-details-toggle" aria-expanded="false" aria-controls="lesson-task-details">Подробнее</button><div id="lesson-task-details" class="lesson-task-details" hidden><h3>По заданиям</h3><div id="lesson-task-list"></div><button type="button" id="hide-lesson-details" class="button lesson-details-toggle">Скрыть</button></div></div>
+    </article>
+    <aside id="tutor" class="masterclass-card reveal" aria-label="Рекомендация для вашего ребёнка" inert>
+      <div id="excellent-recommendation"><p class="recommendation-label">РЕКОМЕНДАЦИЯ ДЛЯ ВАШЕГО РЕБЁНКА</p><h3>Получается отлично!<br>Раскройте потенциал</h3><p class="recommendation-copy">Бесплатный мастер-класс по программированию:<br>ребёнок создаст свою первую игру в мини-группе.</p><img class="masterclass-game" src="assets/oct26-game.png" alt="Первая игра, которую ребёнок создаст на мастер-классе"></div>
+      <div id="support-recommendation" hidden><p class="recommendation-label">3 БЕСПЛАТНЫХ ЗАНЯТИЯ С РЕПЕТИТОРОМ УЧИ.РУ</p><h3>Нужно отработать проблемные темы</h3><p class="recommendation-copy">Разберём ошибки с репетитором. Поможем решать сложные задания увереннее.</p><div class="teacher-preview" id="teacher-photo"><div class="teacher-scene"><img class="teacher-background" src="assets/oct26-bad-imgRectangle240948571.png" alt=""><img class="teacher-waves" src="assets/oct26-bad-imgGroup2136142255.svg" alt=""><div class="teacher-person"><img src="assets/oct26-bad-imgRectangle240948570.png" alt="Репетитор Васильева Иннеса"></div><img class="teacher-call" src="assets/oct26-bad-imgFrame2147233842.svg" alt=""><div class="teacher-name"><strong>Васильева<br>Иннеса</strong><span>Математика<br>Стаж 12 лет</span></div></div></div></div>
+      <button id="masterclass-signup" class="button masterclass-signup" type="button">Записаться на бесплатный мастер-класс</button><div class="masterclass-legal"><p>Нажимая «Записаться», я <u>соглашаюсь на передачу</u> персональных данных в ООО «ПРЕПРЕП.РУ» и принимаю <u>пользовательскую документацию</u></p><span class="ad">Реклама<img src="assets/v2-ad.svg" alt=""></span></div>
+    </aside>
+  </div><div id="result-footer" class="lesson-result-footer reveal"><button id="continue" class="button">Продолжить</button></div>
+</section>
     <section id="bonus-screen" class="screen bonus-screen" aria-labelledby="bonus-title" hidden>
       <h1 id="bonus-title" tabindex="-1">Дополнительная награда</h1>
       <div class="coupon-card"><p>Ты получаешь <strong>скидку 20%</strong><br>на любые занятия!</p><button id="copy-coupon" class="coupon-code" type="button" aria-label="Скопировать ПРОМОКОД375"><span id="copy-coupon-label">ПРОМОКОД375</span><img src="assets/v2-copy.svg" alt=""></button><button id="use-coupon" class="button coupon-use">Использовать промокод</button></div>
-      <div class="bonus-chest"><img src="assets/v2-bonus-chest.png" alt="Фиолетовый сундук с дополнительной наградой"></div>
+      <img class="bonus-arrow" src="assets/oct26-imgPolygon1.svg" alt=""><div class="bonus-chest"><img src="assets/oct26-imgImage644.png" alt="Сундук с дополнительной наградой"></div>
       <button id="bonus-continue" class="button white">Продолжить</button>
       <p id="coupon-status" class="sr-only" role="status" aria-live="polite"></p>
     </section>
@@ -157,6 +132,7 @@
     </form>
   </dialog>
 
+  <dialog id="signup-dialog" class="signup-dialog" aria-labelledby="signup-title"><button id="signup-close" class="dialog-close" type="button" aria-label="Закрыть форму">×</button><h2 id="signup-title">Запись на бесплатный мастер-класс</h2><p>Оставьте телефон родителя, чтобы выбрать удобное время занятия.</p><div class="signup-enrollment"><form id="tutor-form" class="phone-form" novalidate><div class="phone-field"><label for="phone">Телефон родителя</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="off" placeholder="+7 (___) ___-__-__" aria-describedby="phone-error" required></div><button class="button signup" type="submit">Записаться</button></form><p id="phone-error" class="phone-error" role="alert" hidden>Введите номер телефона полностью</p></div><div id="tutor-success" class="tutor-success" hidden><div role="status" aria-live="polite"><img src="assets/submitted-check.svg" alt=""><h3 id="tutor-success-title" tabindex="-1">Заявка отправлена!</h3><p>Мы свяжемся с вами в ближайшее время, чтобы подобрать удобное время занятия</p></div><div><p>Ввели данные неверно?</p><button type="button" id="tutor-retry">Запишитесь ещё раз</button></div></div></dialog>
   <dialog id="demo-dialog" aria-labelledby="dialog-title"><button id="close-dialog" class="dialog-close" aria-label="Закрыть">×</button><h2 id="dialog-title"></h2><p id="dialog-description"></p><button id="dialog-action" class="button primary"></button></dialog>
 </body>
 </html>
