@@ -1,4 +1,6 @@
 /* Updated lesson flow, Figma section 5218:7717, 26 October 2026. */
+@font-face{font-family:'Oceanic Grotesk Condensed';src:url('assets/oceanic-grotesk-condensed-extrabold.woff') format('woff');font-style:normal;font-weight:800;font-display:swap}
+.masterclass-card h3,.section-summary-copy h4,.grades-promo p{font-family:'Oceanic Grotesk Condensed','Arial Narrow',sans-serif;font-weight:800;font-synthesis:none}
 body[data-view="analytics"]{background:#f2f3f7}
 #stage[data-step="result"]{padding:16px 16px 0;overflow:visible;min-height:calc(100svh - 48px)}
 .lesson-analytics{width:100%;max-width:1280px;color:#2f2f45;--metric-progress:0}
@@ -75,7 +77,7 @@ body[data-view="analytics"]{background:#f2f3f7}
 [data-result-kind="support"] .lesson-task{background:#fff7f9}
 [data-result-kind="support"] .task-track i{background:#ff6170}
 #support-recommendation .recommendation-label{color:#ffac58;margin-bottom:12px}
-#support-recommendation h3{font-family:'Arial Narrow',Impact,sans-serif;font-stretch:condensed;font-size:32px;line-height:40px;margin-bottom:12px}
+#support-recommendation h3{font-size:32px;line-height:40px;margin-bottom:12px}
 #support-recommendation .recommendation-copy{margin-bottom:24px}
 #support-recommendation{display:flex;flex-direction:column;flex:1}
 .teacher-preview{position:relative;width:100%;height:243px;flex-shrink:0;margin-top:auto;overflow:hidden;border-radius:32px;background:#ffffa3}
