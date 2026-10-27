@@ -67,7 +67,6 @@ body[data-view="analytics"]{background:#f2f3f7}
 .lesson-analytics .tutor.reveal,.masterclass-card.reveal{transform:translateX(32px)}
 .masterclass-card.reveal.shown{transform:translateX(0)}
 [data-result-kind="support"] .score-secondary{transform:rotate(180deg)}
-[data-result-kind="support"] .lesson-score .grade{gap:0}
 [data-result-kind="support"] .metric-status{background:#ffebee;color:#8b2330}
 [data-result-kind="support"] #speed-status{background:#fff5eb;color:#8a5124}
 [data-result-kind="support"] #correct-icon,[data-result-kind="support"] #correct-fill{background:#ff6170}

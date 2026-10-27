@@ -5,6 +5,7 @@ const resultParts=['statistics','grade','result-reward','tutor','result-details'
 let resultKind='excellent';
 let metrics=[['minutes',6],['correct',96]];
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const gradePreparationMs=7000/1.33;
 let run=0,frame=0,ready=false,parentVerified=false,hasLessonResult=false,dialogAction=()=>{};
 function animate(duration,update,token=run){
   return new Promise(resolve=>{
@@ -114,7 +115,7 @@ async function prepareGrade(){
   $('grade-progress').setAttribute('aria-valuenow','0');
   showScreen('parent-screen','preparing','parent-title');
   $('progress-status').textContent='Позови родителя, чтобы посмотреть оценку вместе.';
-  if(!await animate(7000,p=>{
+  if(!await animate(gradePreparationMs,p=>{
     const value=Math.floor(p*100);
     $('progress-fill').style.transform=`scaleX(${p})`;
     $('progress-percent').textContent=`${value}%`;
@@ -235,8 +236,9 @@ function applyResult(kind){
   $('preview-support').setAttribute('aria-pressed',String(bad));
   metrics=[['minutes',bad?8:6],['correct',bad?60:96]];
   $('result-screen').dataset.resultKind=resultKind;
-  $('score-value').textContent=bad?'3,2':'4,8';$('score-caption').hidden=bad;
-  $('lesson-score').setAttribute('aria-label',bad?'Оценка 3,2':'Оценка 4,8, хорошо');
+  $('score-value').textContent=bad?'3,2':'4,8';$('score-caption').hidden=false;
+  $('score-caption').textContent=bad?'Средне':'Хорошо';
+  $('lesson-score').setAttribute('aria-label',bad?'Оценка 3,2, средне':'Оценка 4,8, хорошо');
   const prefix=bad?'bad':'good';
   $('score-main-arc').src='assets/oct26-'+prefix+'-imgEllipse8334.svg';
   $('score-other-arc').src='assets/oct26-'+prefix+'-imgEllipse8333.svg';
