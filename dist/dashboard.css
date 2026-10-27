@@ -61,8 +61,7 @@ body[data-view="dashboard"] .access{font-size:14px;height:36px;margin-left:8px}
 .dashboard-grade-circle>strong{position:absolute;left:34.167px;top:22.167px;font-weight:800;font-size:64px;line-height:64px}
 .dashboard-circle-eggs{position:absolute;left:23.75px;top:22.5px;width:60px;height:60px;mix-blend-mode:luminosity}
 .dashboard-circle-eggs img{position:absolute;left:6.61px;top:10.48px;transform:rotate(-2.53deg)}
-.active-lesson{padding:0;background:transparent;text-align:left;border-radius:26px;transition:transform .2s}
-.active-lesson:hover{transform:translateY(-4px)}
+.active-lesson{padding:0;background:transparent;text-align:left;border-radius:26px}
 .active-lesson:focus-visible{outline:3px solid #765fde;outline-offset:6px}
 .curriculum-path{position:absolute;left:40px;top:188px;width:28px;height:1016px;pointer-events:none}
 .curriculum-path img{transform-origin:top left;transform:rotate(90deg) scaleY(-1)}

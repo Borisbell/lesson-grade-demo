@@ -168,7 +168,7 @@ $('lesson-modules').addEventListener('click',event=>{
   if(event.target.closest('[data-start-lesson]'))beginLessonResult();
   else if(event.target.closest('[data-open-result]'))openCalculatedResult('excellent');
   else if(event.target.closest('[data-open-support]')){openCalculatedResult('support');toggleTaskDetails(true);}
-  else if(event.target.closest('[data-section-signup]')){openCalculatedResult('support');toggleTaskDetails(true);openSignup();}
+  else if(event.target.closest('[data-section-signup]'))openSignup();
 });
 $('learn-grade').addEventListener('click',prepareGrade);
 $('open-result').addEventListener('click',openParentCheck);

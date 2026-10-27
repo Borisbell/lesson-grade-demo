@@ -137,3 +137,45 @@ body[data-view="analytics"] .demo-controls button,body[data-view="dashboard"] .d
 @media(max-width:600px){#stage[data-step="result"]{padding:16px 12px 0}.lesson-statistics,.masterclass-card{padding:24px 20px;border-radius:24px}.lesson-statistics{min-height:0}.lesson-statistics h2{font-size:24px;line-height:30px}.lesson-score-row{gap:12px}.lesson-divider{display:none}.lesson-eggs{width:160px;flex:0 1 160px}.lesson-score{flex:0 0 184px}.lesson-metric-heading h3{font-size:18px;gap:8px}.metric-status{width:auto;font-size:11px;line-height:16px;padding:0 8px}.metric-comparison{grid-template-columns:90px minmax(0,1fr) 44px;font-size:12px;gap:6px}.masterclass-card h3{font-size:28px;line-height:34px}.recommendation-label{font-size:12px;line-height:18px}.recommendation-copy{font-size:16px;line-height:24px}.masterclass-signup{height:auto;min-height:56px;white-space:normal;font-size:16px;line-height:22px}.masterclass-game{height:auto;aspect-ratio:548/259}.lesson-task{gap:12px;padding:12px}.lesson-task>img{width:64px;height:64px;flex-basis:64px}.lesson-task h4{font-size:14px;line-height:20px}.lesson-task-accuracy{grid-template-columns:minmax(0,1fr) 52px;font-size:11px;gap:4px}.lesson-task-accuracy>span:first-child{grid-column:1 / -1}.lesson-task-time{font-size:11px;line-height:16px}.signup-dialog{padding:40px 24px 28px}.signup-dialog h2{font-size:24px;line-height:30px}.curriculum{max-width:calc(100% - 32px)}.section-summary-card{grid-template-columns:minmax(0,1fr);padding:24px;gap:24px}.section-summary-score{width:180px;justify-self:center}.section-summary-card .section-mini-score{transform:none;margin:0 0 12px}.section-summary-copy{gap:16px}.section-summary-copy h4{font-size:28px;line-height:36px}.teacher-preview{height:auto;aspect-ratio:550/243}}
 @media(max-width:420px){.lesson-score{transform:scale(.84);transform-origin:left center;margin-right:-29.44px;flex-basis:184px}.lesson-eggs{flex-basis:140px;width:140px}.lesson-eggs-art{transform:scale(.84);transform-origin:center center;margin-bottom:-12px}.lesson-eggs p{font-size:12px}.lesson-task-details h3{font-size:22px}}
 @media(max-width:360px){.lesson-score{transform:scale(.72);margin-right:-51.52px}.lesson-eggs{flex-basis:120px;width:120px}.lesson-eggs-art{transform:scale(.72)}.lesson-metric-heading h3{font-size:16px;gap:5px}.metric-status{font-size:10px}.lesson-statistics,.masterclass-card{padding:20px 16px}}
+
+/* Promo typography and colours from the updated Figma frames. */
+.masterclass-card{background:#322463}
+[data-result-kind="support"] .masterclass-card,.section-summary-card{background:#362f73}
+.masterclass-card h3,#support-recommendation h3,.section-summary-copy h4{font-size:48px;line-height:46px;letter-spacing:0}
+[data-result-kind="excellent"] .masterclass-signup{background:#fe5c57}
+[data-result-kind="excellent"] .masterclass-signup:hover{background:#f14f4a}
+
+@media(max-width:600px){
+  #stage[data-step="result"]{padding:8px 8px 0}
+  .lesson-analytics-layout{gap:8px}
+  .lesson-statistics{padding:14px;border-radius:20px}
+  .lesson-statistics h2{font-size:20px;line-height:24px}
+  .lesson-score-row{height:96px;margin-top:8px;gap:8px}
+  .lesson-score{transform:scale(.52);transform-origin:left top;margin-right:-88.32px;margin-bottom:-88.32px;flex:0 0 184px;align-self:flex-start}
+  .lesson-eggs{width:120px;flex:0 1 120px;height:96px;gap:0}
+  .lesson-eggs-art{transform:scale(.5);transform-origin:center top;margin-bottom:-80px}
+  .lesson-eggs p{font-size:11px;line-height:16px}
+  .lesson-metrics{margin-top:8px;gap:8px}
+  .lesson-metric{height:58px}
+  .lesson-metric-heading{height:20px;gap:6px;margin-bottom:2px}
+  .lesson-metric-heading h3{font-size:15px;line-height:20px;gap:6px}
+  .lesson-metric-icon{width:20px;height:20px}
+  .metric-status{height:20px;font-size:10px;line-height:14px;padding:0 6px}
+  .metric-comparison{grid-template-columns:88px minmax(0,1fr) 42px;gap:2px 6px;font-size:11px;line-height:16px}
+  .metric-track{height:16px}
+  .metric-fill{height:8px}
+  .lesson-details-toggle{height:40px;min-height:40px;margin-top:8px;font-size:14px;line-height:20px;border-radius:12px}
+  .masterclass-card{padding:16px;border-radius:20px}
+  .masterclass-card h3,#support-recommendation h3,.section-summary-copy h4{font-size:36px;line-height:34px;margin-bottom:8px}
+  .masterclass-card .recommendation-label{font-size:11px;line-height:14px;margin-bottom:8px}
+  .masterclass-card .recommendation-copy,#support-recommendation .recommendation-copy{font-size:14px;line-height:20px;margin-bottom:12px}
+  .masterclass-game,.teacher-preview{border-radius:20px}
+  .masterclass-signup{min-height:44px;margin-top:12px;font-size:14px;line-height:18px;padding:8px 12px;border-radius:12px}
+  .masterclass-legal{margin-top:8px}
+  .masterclass-legal p{font-size:9px;line-height:11px}
+  .masterclass-legal .ad{font-size:10px}
+  .lesson-task-details{margin-top:16px}
+  .lesson-task-details h3{margin-bottom:12px}
+  #lesson-task-list{gap:12px}
+  .section-summary-copy h4{margin:0}
+}
