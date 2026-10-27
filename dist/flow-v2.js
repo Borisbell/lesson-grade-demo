@@ -20,6 +20,22 @@ function animate(duration,update,token=run){
 }
 const pause=(ms,token)=>animate(ms,()=>{},token);
 const reveal=id=>$(id).classList.add('shown');
+function setScoreProgress(progress){
+  // Begin before the rounded top cap so it appears at the start, not after a full turn.
+  const angle=Math.max(0,Math.min(progress,1))*360;
+  const mask=`conic-gradient(from -20deg,#000 ${angle}deg,transparent ${angle}deg)`;
+  $('chart-reveal').style.maskImage=mask;
+  $('chart-reveal').style.webkitMaskImage=mask;
+}
+function animateScore(token){
+  setScoreProgress(0);
+  return animate(reducedMotion?60:1900,p=>{
+    const eased=1-Math.pow(1-p,2.3);
+    setScoreProgress(eased);
+    metrics.forEach(([id,value])=>$(id).textContent=String(Math.round(value*eased)));
+    $('result-screen').style.setProperty('--metric-progress',String(eased));
+  },token);
+}
 function setHeader(bonus){
   $('nav-profile-name').textContent=bonus?'Ученик':'Константин К.';
   $('nav-logo').src=bonus?'assets/reward-imgUchi.svg':'assets/v2-logo.svg';
@@ -49,7 +65,7 @@ function resetResults(){
   resultParts.forEach(id=>$(id).classList.remove('shown'));
   $('tutor').inert=true;
   metrics.forEach(([id])=>$(id).textContent='0');
-  $('chart-reveal').style.maskImage='conic-gradient(from 0deg,#000 0deg,transparent 0deg)';
+  setScoreProgress(0);
   resetTutorForm();toggleTaskDetails(false);$('result-screen').style.setProperty('--metric-progress','0');
 }
 function clearParentError(){
@@ -105,12 +121,7 @@ async function openResults(){
   const token=++run;
   showScreen('result-screen','result','result-title');reveal('statistics');
   if(!await pause(reducedMotion?60:450,token))return;
-  if(!await animate(reducedMotion?60:1900,p=>{
-    const eased=1-Math.pow(1-p,2.3),angle=eased*360;
-    $('chart-reveal').style.maskImage=`conic-gradient(from 0deg,#000 ${angle}deg,transparent ${angle}deg)`;
-    metrics.forEach(([id,value])=>$(id).textContent=String(Math.round(value*eased)));
-    $('result-screen').style.setProperty('--metric-progress',String(eased));
-  },token))return;
+  if(!await animateScore(token))return;
   reveal('grade');
   $('progress-status').textContent='Оценка 4,8. Правильность 96%, время 6 минут.';
   if(!await pause(reducedMotion?60:850,token))return;
@@ -127,7 +138,7 @@ function openCalculatedResult(kind='excellent'){
   showScreen('result-screen','result','result-title');resultParts.forEach(reveal);
   metrics.forEach(([id,value])=>$(id).textContent=String(value));
   $('result-screen').style.setProperty('--metric-progress','1');
-  $('chart-reveal').style.maskImage='conic-gradient(from 0deg,#000 360deg,transparent 360deg)';
+  setScoreProgress(1);
   $('tutor').inert=false;
   $('progress-status').textContent=resultKind==='support'?'Оценка 3,2. Правильность 60%, время 8 минут.':'Оценка 4,8. Правильность 96%, время 6 минут.';
 }
@@ -201,6 +212,8 @@ $('tutor-form').addEventListener('submit',event=>{
 $('tutor-retry').addEventListener('click',()=>{resetTutorForm();$('phone').focus();});
 function applyResult(kind){
   resultKind=kind==='support'?'support':'excellent';const bad=resultKind==='support';
+  $('preview-excellent').setAttribute('aria-pressed',String(!bad));
+  $('preview-support').setAttribute('aria-pressed',String(bad));
   metrics=[['minutes',bad?8:6],['correct',bad?60:96]];
   $('result-screen').dataset.resultKind=resultKind;
   $('score-value').textContent=bad?'3,2':'4,8';$('score-caption').hidden=bad;
@@ -215,6 +228,18 @@ function applyResult(kind){
   $('lesson-task-list').innerHTML=[0,1,2].map((_,i)=>{const n=bad?5:i===1?8:10;return '<article class="lesson-task"><img src="assets/oct26-'+(bad?'bad-img':i===1?'good-img1':'good-img')+'.png" alt="Превью задания"><div class="lesson-task-content"><h4>'+(bad?'Вычитание':'Сложение')+' в пределах 20</h4><div class="lesson-task-accuracy"><span>Правильно</span><span class="task-track"><i style="--task-value:'+n*10+'%"></i></span><strong>'+n+' из 10</strong></div><p class="lesson-task-time"><span>Время</span><strong>2 мин</strong></p></div></article>';}).join('');
   toggleTaskDetails(false);resetTutorForm();updateTeacherScale();
 }
+async function previewResult(kind){
+  if($('stage').dataset.step!=='result'||kind===resultKind)return;
+  const token=++run;cancelAnimationFrame(frame);
+  const expanded=!$('lesson-task-details').hidden;
+  applyResult(kind);resetResults();toggleTaskDetails(expanded);
+  resultParts.filter(id=>id!=='grade').forEach(reveal);
+  $('tutor').inert=false;
+  window.scrollTo({top:0,behavior:'instant'});
+  if(!await animateScore(token))return;
+  reveal('grade');hasLessonResult=true;
+  $('progress-status').textContent=resultKind==='support'?'Оценка 3,2. Правильность 60%, время 8 минут.':'Оценка 4,8. Правильность 96%, время 6 минут.';
+}
 function toggleTaskDetails(expanded){
   $('lesson-task-details').hidden=!expanded;$('toggle-lesson-details').setAttribute('aria-expanded',String(expanded));
   $('toggle-lesson-details').textContent=expanded?'Скрыть':'Подробнее';
@@ -222,6 +247,8 @@ function toggleTaskDetails(expanded){
 function updateTeacherScale(){const width=$('teacher-photo').clientWidth;if(width)$('teacher-photo').style.setProperty('--teacher-scale',String(width/550));}
 function openSignup(){resetTutorForm();$('signup-dialog').showModal();$('phone').focus();}
 $('toggle-lesson-details').addEventListener('click',()=>toggleTaskDetails($('lesson-task-details').hidden));
+$('preview-excellent').addEventListener('click',()=>previewResult('excellent'));
+$('preview-support').addEventListener('click',()=>previewResult('support'));
 $('masterclass-signup').addEventListener('click',openSignup);
 $('signup-close').addEventListener('click',()=>$('signup-dialog').close());
 window.addEventListener('resize',updateTeacherScale);

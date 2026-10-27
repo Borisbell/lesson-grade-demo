@@ -8,7 +8,7 @@ body[data-view="analytics"]{background:#f2f3f7}
 .lesson-score-row{display:flex;align-items:center;justify-content:space-between;height:184px;margin-top:24px}
 .lesson-score{position:relative;width:184px;height:184px;flex:0 0 184px}
 .score-base{position:absolute;left:0;top:0;width:32px;height:32px;transform:scale(5.75);transform-origin:top left}
-.score-reveal{position:absolute;inset:0;mask-image:conic-gradient(#000 0deg,transparent 0deg)}
+.score-reveal{position:absolute;inset:0;mask-image:conic-gradient(from -20deg,#000 0deg,transparent 0deg)}
 .score-arc,.score-secondary{position:absolute;inset:4.246px;transform:rotate(-90deg)}
 .score-secondary{transform:rotate(-180deg) scaleX(-1)}
 .score-arc img,.score-secondary img{position:absolute;left:0;top:0}
@@ -56,6 +56,12 @@ body[data-view="analytics"]{background:#f2f3f7}
 .masterclass-legal .ad{font-size:11px;flex-shrink:0}
 .lesson-result-footer{display:flex;justify-content:center;height:88px;padding:16px}
 .lesson-result-footer .button{color:#765fde;background:transparent;width:240px}
+.result-preview-controls{position:fixed;left:12px;bottom:12px;z-index:6;display:flex;align-items:center;gap:2px;padding:4px;border:1px solid #d8d3ed;border-radius:12px;background:#fffffff2;color:#787886}
+.result-preview-controls>span{padding:0 6px;font-size:11px;line-height:16px}
+.result-preview-controls button{min-width:36px;height:28px;padding:4px 8px;border-radius:8px;background:transparent;color:#765fde;font-size:12px;line-height:20px;font-variant-numeric:tabular-nums;box-shadow:none}
+.result-preview-controls button:hover{background:#eae6ff}
+.result-preview-controls button[aria-pressed="true"]{background:#765fde;color:#fff}
+@media(max-width:600px){.result-preview-controls{left:8px;bottom:8px}.lesson-result-footer{height:132px;padding-bottom:60px}}
 .lesson-analytics .tutor.reveal,.masterclass-card.reveal{transform:translateX(32px)}
 .masterclass-card.reveal.shown{transform:translateX(0)}
 [data-result-kind="support"] .score-secondary{transform:rotate(180deg)}
