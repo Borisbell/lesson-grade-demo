@@ -36,6 +36,14 @@ function animateScore(token){
     $('result-screen').style.setProperty('--metric-progress',String(eased));
   },token);
 }
+function syncResultVideo(){
+  const video=$('masterclass-video');
+  if($('stage').dataset.step==='result'&&resultKind==='excellent'){
+    video.muted=true;
+    const playback=video.play();
+    if(playback)playback.catch(error=>{if(error.name==='NotAllowedError')video.controls=true;});
+  }else video.pause();
+}
 function setHeader(bonus){
   $('nav-profile-name').textContent=bonus?'Ученик':'Константин К.';
   $('nav-logo').src=bonus?'assets/reward-imgUchi.svg':'assets/v2-logo.svg';
@@ -52,6 +60,7 @@ function showScreen(id,step,title){
   screens.forEach(screen=>{$(screen).hidden=screen!==id;});
   $('stage').dataset.step=step;
   document.body.dataset.view=step==='dashboard'?'dashboard':step==='bonus'?'bonus':step==='result'?'analytics':'lesson';
+  syncResultVideo();
   if(step==='result'){$('analytics-scroll').scrollTop=0;updateTeacherScale();}
   setHeader(step==='bonus');
   $(title).focus({preventScroll:true});
@@ -226,7 +235,7 @@ function applyResult(kind){
   $('correct-status').textContent=bad?'Ниже среднего':'Выше среднего';$('speed-status').textContent=bad?'Нормальная':'Быстрее среднего';
   $('excellent-recommendation').hidden=bad;$('support-recommendation').hidden=!bad;
   $('lesson-task-list').innerHTML=[0,1,2].map((_,i)=>{const n=bad?5:i===1?8:10;return '<article class="lesson-task"><img src="assets/oct26-'+(bad?'bad-img':i===1?'good-img1':'good-img')+'.png" alt="Превью задания"><div class="lesson-task-content"><h4>'+(bad?'Вычитание':'Сложение')+' в пределах 20</h4><div class="lesson-task-accuracy"><span>Правильно</span><span class="task-track"><i style="--task-value:'+n*10+'%"></i></span><strong>'+n+' из 10</strong></div><p class="lesson-task-time"><span>Время</span><strong>2 мин</strong></p></div></article>';}).join('');
-  toggleTaskDetails(false);resetTutorForm();updateTeacherScale();
+  toggleTaskDetails(false);resetTutorForm();updateTeacherScale();syncResultVideo();
 }
 async function previewResult(kind){
   if($('stage').dataset.step!=='result'||kind===resultKind)return;
