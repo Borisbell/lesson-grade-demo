@@ -44,6 +44,15 @@ function syncResultVideo(){
     if(playback)playback.catch(error=>{if(error.name==='NotAllowedError')video.controls=true;});
   }else video.pause();
 }
+function stopParentNarration(){
+  const audio=$('parent-narration');audio.pause();audio.currentTime=0;
+}
+function playParentNarration(){
+  stopParentNarration();
+  const playback=$('parent-narration').play();
+  // The sound button remains available if a browser requires another user gesture.
+  if(playback)playback.catch(()=>{});
+}
 function setHeader(bonus){
   $('nav-profile-name').textContent=bonus?'Ученик':'Константин К.';
   $('nav-logo').src=bonus?'assets/reward-imgUchi.svg':'assets/v2-logo.svg';
@@ -57,6 +66,7 @@ function setHeader(bonus){
   $('egg-balance').textContent=bonus?'28':'1576';
 }
 function showScreen(id,step,title){
+  if(id==='parent-screen')playParentNarration();else stopParentNarration();
   screens.forEach(screen=>{$(screen).hidden=screen!==id;});
   $('stage').dataset.step=step;
   document.body.dataset.view=step==='dashboard'?'dashboard':step==='bonus'?'bonus':step==='result'?'analytics':'lesson';
@@ -184,7 +194,7 @@ $('parent-check-form').addEventListener('submit',event=>{
   }
   parentVerified=true;closeParentCheck();openResults();
 });
-$('grade-voice').addEventListener('click',()=>speak('Посмотри оценку с родителем. Позови взрослого, чтобы узнать результат вместе.'));
+$('grade-voice').addEventListener('click',playParentNarration);
 $('parent-check-voice').addEventListener('click',()=>speak('Решите пример. Двадцать семь плюс тридцать шесть.'));
 $('restart').addEventListener('click',restart);
 $('later').addEventListener('click',openBonus);
@@ -261,4 +271,5 @@ $('preview-support').addEventListener('click',()=>previewResult('support'));
 $('masterclass-signup').addEventListener('click',openSignup);
 $('signup-close').addEventListener('click',()=>$('signup-dialog').close());
 window.addEventListener('resize',updateTeacherScale);
+window.addEventListener('pagehide',stopParentNarration);
 applyResult('excellent');setHeader(false);

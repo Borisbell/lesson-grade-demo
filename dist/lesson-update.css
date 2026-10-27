@@ -148,14 +148,14 @@ body[data-view="analytics"] .demo-controls button,body[data-view="dashboard"] .d
 @media(max-width:600px){
   #stage[data-step="result"]{padding:8px 8px 0}
   .lesson-analytics-layout{gap:8px}
-  .lesson-statistics{padding:14px;border-radius:20px}
-  .lesson-statistics h2{font-size:20px;line-height:24px}
-  .lesson-score-row{height:96px;margin-top:8px;gap:8px}
-  .lesson-score{transform:scale(.52);transform-origin:left top;margin-right:-88.32px;margin-bottom:-88.32px;flex:0 0 184px;align-self:flex-start}
-  .lesson-eggs{width:120px;flex:0 1 120px;height:96px;gap:0}
-  .lesson-eggs-art{transform:scale(.5);transform-origin:center top;margin-bottom:-80px}
+  .lesson-statistics{padding:16px;border-radius:20px}
+  .lesson-statistics h2{font-size:20px;line-height:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .lesson-score-row{height:80px;margin-top:4px;gap:8px}
+  .lesson-score{transform:scale(.416);transform-origin:left top;margin-right:-107.456px;margin-bottom:-107.456px;flex:0 0 184px;align-self:flex-start}
+  .lesson-eggs{width:96px;flex:0 1 96px;height:80px;gap:0}
+  .lesson-eggs-art{transform:scale(.4);transform-origin:center top;margin-bottom:-96px}
   .lesson-eggs p{font-size:11px;line-height:16px}
-  .lesson-metrics{margin-top:8px;gap:8px}
+  .lesson-metrics{margin-top:4px;gap:8px}
   .lesson-metric{height:58px}
   .lesson-metric-heading{height:20px;gap:6px;margin-bottom:2px}
   .lesson-metric-heading h3{font-size:15px;line-height:20px;gap:6px}
@@ -164,7 +164,7 @@ body[data-view="analytics"] .demo-controls button,body[data-view="dashboard"] .d
   .metric-comparison{grid-template-columns:88px minmax(0,1fr) 42px;gap:2px 6px;font-size:11px;line-height:16px}
   .metric-track{height:16px}
   .metric-fill{height:8px}
-  .lesson-details-toggle{height:40px;min-height:40px;margin-top:8px;font-size:14px;line-height:20px;border-radius:12px}
+  .lesson-details-toggle{height:48px;min-height:48px;margin-top:8px;font-size:14px;line-height:20px;border-radius:12px}
   .masterclass-card{padding:16px;border-radius:20px}
   .masterclass-card h3,#support-recommendation h3,.section-summary-copy h4{font-size:36px;line-height:34px;margin-bottom:8px}
   .masterclass-card .recommendation-label{font-size:11px;line-height:14px;margin-bottom:8px}
