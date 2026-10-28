@@ -14,8 +14,10 @@
   <link rel="stylesheet" href="new-flow.css">
   <link rel="stylesheet" href="analytics.css">
   <link rel="stylesheet" href="lesson-update.css">
+  <link rel="stylesheet" href="math-exercise.css">
   <script src="dashboard.js" defer></script>
   <script src="flow-v2.js" defer></script>
+  <script src="math-exercise.js" defer></script>
 </head>
 <body data-view="dashboard" data-completed="false">
   <header class="nav" aria-label="Учи.ру">
@@ -70,6 +72,25 @@
       </div>
     </section>
 
+    <section id="exercise-screen" class="screen exercise-screen" aria-labelledby="exercise-title" hidden>
+      <div class="exercise-card">
+        <div class="exercise-toolbar"><button type="button" id="exercise-back" class="exercise-back">Назад</button><div id="exercise-progress" class="exercise-progress" role="progressbar" aria-label="Прогресс урока" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0"><div id="exercise-dots" class="exercise-dots"></div></div><span id="exercise-count" class="exercise-count">1 из 3</span></div>
+        <div class="exercise-content">
+          <h1 id="exercise-title" class="exercise-title" tabindex="-1">Найди, из каких деталей состоит машинка</h1>
+          <p class="exercise-hint">Перетащи детали в контейнер. Или выбери деталь и нажми на нужную ячейку.</p>
+          <div id="assembly-board" class="assembly-board" data-state="active" role="group" aria-label="Собери число из сотен, десятков и единиц">
+            <div id="assembly-scene" class="assembly-scene">
+              <i class="assembly-screw" aria-hidden="true"></i><i class="assembly-screw" aria-hidden="true"></i><i class="assembly-screw" aria-hidden="true"></i><i class="assembly-screw" aria-hidden="true"></i>
+              <svg class="assembly-tools" viewBox="0 0 565 288" aria-hidden="true"><g fill="#fff" stroke="#a2a5a6" stroke-width="1"><path d="M99 22l15-2 5 31-3 17 6 15-7 1 8 67-2 11-5-9-7-68-7 1 4-17-7-16z"/><path d="M445 18l7 12 8-1 1-15c7 5 10 13 6 21l-6 10 4 78 6 13-3 14-5-13-8 1-1 15-7-12 3-16-4-80-8-10c-3-8 0-15 7-17z"/></g></svg>
+              <div class="number-machine"><span id="machine-number" class="machine-number">596</span></div>
+              <div id="assembly-slots" class="assembly-slots"></div>
+            </div>
+          </div>
+          <div id="exercise-parts" class="exercise-parts" role="group" aria-label="Детали для сборки числа"></div>
+          <p id="exercise-status" class="exercise-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
     <div class="rays" aria-hidden="true"><img src="assets/v2-rays.svg" alt=""></div>
     <section id="reward-screen" class="screen reward-screen" aria-labelledby="reward-title" hidden>
       <h1 id="reward-title" tabindex="-1">Получилось! Урок пройден</h1>

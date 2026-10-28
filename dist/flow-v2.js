@@ -1,6 +1,6 @@
 'use strict';
 const $ = id => document.getElementById(id);
-const screens=['dashboard-screen','reward-screen','parent-screen','result-screen','bonus-screen'];
+const screens=['dashboard-screen','exercise-screen','reward-screen','parent-screen','result-screen','bonus-screen'];
 const resultParts=['statistics','grade','result-reward','tutor','result-details','result-footer'];
 let resultKind='excellent';
 let metrics=[['minutes',6],['correct',96]];
@@ -89,7 +89,7 @@ function showScreen(id,step,title){
   if(id==='parent-screen')playParentNarration();else stopParentNarration();
   screens.forEach(screen=>{$(screen).hidden=screen!==id;});
   $('stage').dataset.step=step;
-  document.body.dataset.view=step==='dashboard'?'dashboard':step==='bonus'?'bonus':step==='result'?'analytics':'lesson';
+  document.body.dataset.view=step==='dashboard'?'dashboard':step==='exercise'?'exercise':step==='bonus'?'bonus':step==='result'?'analytics':'lesson';
   syncResultVideo();
   if(step==='result'){$('analytics-scroll').scrollTop=0;updateTeacherScale();}
   setHeader(step==='bonus');
@@ -111,6 +111,7 @@ function clearParentError(){
   $('parent-answer-error').hidden=true;$('parent-answer-error').textContent='';$('parent-answer').removeAttribute('aria-invalid');
 }
 function returnToMath(){
+  stopMathExercise();
   run++;cancelAnimationFrame(frame);
   $('demo-dialog').close();$('parent-check').close();$('signup-dialog').close();
   ready=false;parentVerified=false;
@@ -119,8 +120,14 @@ function returnToMath(){
   showScreen('dashboard-screen','dashboard','dashboard-title');
 }
 function restart(){hasLessonResult=false;hasPendingLessonResult=false;returnToMath();}
-function beginLessonResult(){
+function beginLesson(){
   if($('stage').dataset.step!=='dashboard')return;
+  run++;cancelAnimationFrame(frame);ready=false;parentVerified=false;resetResults();
+  showScreen('exercise-screen','exercise','exercise-title');startMathExercise(beginLessonResult);
+}
+function beginLessonResult(){
+  if($('stage').dataset.step!=='exercise'||!isMathExerciseComplete())return;
+  stopMathExercise();
   run++;cancelAnimationFrame(frame);ready=false;parentVerified=false;resetResults();
   hasPendingLessonResult=!hasLessonResult;
   applyResult('excellent');showScreen('reward-screen','reward','reward-title');
@@ -205,7 +212,7 @@ function speak(text){
   window.speechSynthesis.cancel();const speech=new SpeechSynthesisUtterance(text);speech.lang='ru-RU';window.speechSynthesis.speak(speech);
 }
 $('lesson-modules').addEventListener('click',event=>{
-  if(event.target.closest('[data-start-lesson]'))beginLessonResult();
+  if(event.target.closest('[data-start-lesson]'))beginLesson();
   else if(event.target.closest('[data-resume-grade]'))resumeLessonResult();
   else if(event.target.closest('[data-open-result]'))openCalculatedResult('excellent');
   else if(event.target.closest('[data-open-support]')){openCalculatedResult('support');toggleTaskDetails(true);}
