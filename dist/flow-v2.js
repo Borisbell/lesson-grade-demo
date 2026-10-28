@@ -38,12 +38,12 @@ function animateScore(token){
   },token);
 }
 function resetReward(){
-  $('result-reward').dataset.rewardPhase=resultKind==='excellent'?'waiting':'settled';
+  $('result-reward').dataset.rewardPhase='waiting';
 }
 async function playReward(token=run){
-  const reward=$('result-reward'),count=$('reward-count');
-  if(resultKind!=='excellent'||reducedMotion){
-    reward.dataset.rewardPhase='settled';count.textContent=resultKind==='excellent'?'30':'10';
+  const reward=$('result-reward'),count=$('reward-count'),total=resultKind==='excellent'?30:10;
+  if(reducedMotion){
+    reward.dataset.rewardPhase='settled';count.textContent=String(total);
     reveal('result-reward');return true;
   }
   resetReward();count.textContent='0';
@@ -52,9 +52,9 @@ async function playReward(token=run){
   reward.dataset.rewardPhase='playing';reveal('result-reward');
   if(!await animate(1700,p=>{
     const progress=Math.max(0,Math.min(1,(p-.73)/.27));
-    count.textContent=String(Math.round(30*(1-Math.pow(1-progress,3))));
+    count.textContent=String(Math.round(total*(1-Math.pow(1-progress,3))));
   },token))return false;
-  reward.dataset.rewardPhase='settled';count.textContent='30';return true;
+  reward.dataset.rewardPhase='settled';count.textContent=String(total);return true;
 }
 function syncResultVideo(){
   const video=$('masterclass-video');
@@ -271,6 +271,9 @@ function applyResult(kind){
   $('lesson-score').setAttribute('aria-label',bad?'Оценка 3,2, средне':'Оценка 4,8, хорошо');
   $('reward-count').textContent=bad?'10':'30';
   $('result-reward').setAttribute('aria-label',bad?'Награда: 10 яиц':'Награда: 30 яиц');
+  const chestGrade=bad?'3':'4';
+  $('reward-chest-closed').src='assets/reward-chest-'+chestGrade+'-closed.png';
+  $('reward-chest-opened').src='assets/reward-chest-'+chestGrade+'-opened.png';
   resetReward();
   const prefix=bad?'bad':'good';
   $('score-main-arc').src='assets/oct26-'+prefix+'-imgEllipse8334.svg';
@@ -287,7 +290,7 @@ async function previewResult(kind){
   const token=++run;cancelAnimationFrame(frame);
   const expanded=!$('lesson-task-details').hidden;
   applyResult(kind);resetResults();toggleTaskDetails(expanded);
-  resultParts.filter(id=>id!=='grade'&&(id!=='result-reward'||resultKind==='support')).forEach(reveal);
+  resultParts.filter(id=>id!=='grade'&&id!=='result-reward').forEach(reveal);
   $('tutor').inert=false;
   window.scrollTo({top:0,behavior:'instant'});
   if(!await animateScore(token))return;
