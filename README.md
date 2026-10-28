@@ -1,6 +1,6 @@
 # Итоги урока — демо, версия 2
 
-Публичный прототип на GitHub Pages: https://borisbell.github.io/lesson-grade-demo/
+Адрес прототипа на GitHub Pages: https://borisbell.github.io/lesson-grade-demo/
 
 ## Сборка и публикация
 
@@ -14,7 +14,9 @@ npm start
 
 Готовый билд находится в `dist/`: HTML, CSS, JavaScript, шрифты, изображения, аудио и видео. Сборка проверяет синтаксис JavaScript, наличие локальных ресурсов и относительные пути, чтобы прототип работал по адресу `/lesson-grade-demo/`. Локальный просмотр: http://127.0.0.1:4173/.
 
-Workflow `.github/workflows/pages.yml` проверяет проект и публикует **только `dist/`** после каждого push в `main`. Для первой публикации в репозитории откройте **Settings → Pages → Build and deployment → Source → GitHub Actions**. Если первый запуск произошёл до включения Pages, повторите его через **Actions → Publish prototype to GitHub Pages → Run workflow**.
+Workflow `.github/workflows/pages.yml` проверяет проект и публикует **только `dist/`** после каждого push в `main`. Рекомендуемый источник в **Settings → Pages → Build and deployment → Source — GitHub Actions**. Если первый запуск произошёл до включения Pages, повторите его через **Actions → Publish prototype to GitHub Pages → Run workflow**.
+
+Также поддерживается уже включённый режим **Deploy from a branch → main → / (root)**: корневой `index.html` открывает `dist/`, а `.nojekyll` отключает обработку Jekyll. Поэтому ссылка на прототип работает при обоих вариантах публикации. Само приложение хранится в одном экземпляре в `dist/`.
 
 Все сценарии работают в браузере без авторизации и сервера. Форма записи демонстрационная: номер телефона не отправляется. Звук и видео подчиняются ограничениям автоплея браузера.
 
