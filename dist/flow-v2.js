@@ -5,8 +5,8 @@ const resultParts=['statistics','grade','result-reward','tutor','result-details'
 let resultKind='excellent';
 let metrics=[['minutes',6],['correct',96]];
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
-const gradePreparationMs=7000/1.33;
-let run=0,frame=0,ready=false,parentVerified=false,hasLessonResult=false,dialogAction=()=>{};
+const gradePreparationMs=7000/1.33/2;
+let run=0,frame=0,ready=false,parentVerified=false,hasLessonResult=false,hasPendingLessonResult=false,dialogAction=()=>{};
 function animate(duration,update,token=run){
   return new Promise(resolve=>{
     const start=performance.now();
@@ -96,17 +96,27 @@ function returnToMath(){
   $('demo-dialog').close();$('parent-check').close();$('signup-dialog').close();
   ready=false;parentVerified=false;
   $('parent-answer').value='';clearParentError();resetResults();
-  resetDashboard(hasLessonResult);
+  resetDashboard(hasLessonResult,hasPendingLessonResult);
   showScreen('dashboard-screen','dashboard','dashboard-title');
 }
-function restart(){hasLessonResult=false;returnToMath();}
+function restart(){hasLessonResult=false;hasPendingLessonResult=false;returnToMath();}
 function beginLessonResult(){
   if($('stage').dataset.step!=='dashboard')return;
   run++;cancelAnimationFrame(frame);ready=false;parentVerified=false;resetResults();
+  hasPendingLessonResult=!hasLessonResult;
   applyResult('excellent');showScreen('reward-screen','reward','reward-title');
 }
+function resumeLessonResult(){
+  if($('stage').dataset.step!=='dashboard'||!hasPendingLessonResult)return;
+  ready=false;parentVerified=false;resetResults();applyResult('excellent');prepareGrade();
+}
+function skipStatistics(){
+  if(!['preparing','ready'].includes($('stage').dataset.step))return;
+  hasPendingLessonResult=!hasLessonResult;returnToMath();
+  $('progress-status').textContent='Оценку можно посмотреть позже. Нажмите на цветной сундук в пройденной теме.';
+}
 async function prepareGrade(){
-  if($('stage').dataset.step!=='reward')return;
+  if($('stage').dataset.step!=='reward'&&!($('stage').dataset.step==='dashboard'&&hasPendingLessonResult))return;
   const token=++run;
   $('parent-screen').classList.remove('ready');
   $('parent-title').textContent='Посмотри оценку с родителем';
@@ -148,7 +158,7 @@ async function openResults(){
   reveal('result-reward');
   if(!await pause(reducedMotion?60:1100,token))return;
   ['tutor','result-details','result-footer'].forEach(reveal);
-  $('tutor').inert=false;hasLessonResult=true;
+  $('tutor').inert=false;hasLessonResult=true;hasPendingLessonResult=false;
   $('progress-status').textContent='Итоги готовы. Раскройте статистику по заданиям или запишитесь на бесплатный мастер-класс.';
 }
 function openCalculatedResult(kind='excellent'){
@@ -177,6 +187,7 @@ function speak(text){
 }
 $('lesson-modules').addEventListener('click',event=>{
   if(event.target.closest('[data-start-lesson]'))beginLessonResult();
+  else if(event.target.closest('[data-resume-grade]'))resumeLessonResult();
   else if(event.target.closest('[data-open-result]'))openCalculatedResult('excellent');
   else if(event.target.closest('[data-open-support]')){openCalculatedResult('support');toggleTaskDetails(true);}
   else if(event.target.closest('[data-section-signup]'))openSignup();
@@ -198,7 +209,7 @@ $('parent-check-form').addEventListener('submit',event=>{
 $('grade-voice').addEventListener('click',playParentNarration);
 $('parent-check-voice').addEventListener('click',()=>speak('Решите пример. Двадцать семь плюс тридцать шесть.'));
 $('restart').addEventListener('click',restart);
-$('later').addEventListener('click',openBonus);
+$('later').addEventListener('click',skipStatistics);
 $('continue').addEventListener('click',openBonus);
 $('bonus-continue').addEventListener('click',returnToMath);
 $('dashboard-tutor-details').addEventListener('click',()=>openCalculatedResult());
@@ -239,6 +250,8 @@ function applyResult(kind){
   $('score-value').textContent=bad?'3,2':'4,8';$('score-caption').hidden=false;
   $('score-caption').textContent=bad?'Средне':'Хорошо';
   $('lesson-score').setAttribute('aria-label',bad?'Оценка 3,2, средне':'Оценка 4,8, хорошо');
+  $('reward-count').textContent=bad?'10':'30';
+  $('result-reward').setAttribute('aria-label',bad?'Награда: 10 яиц':'Награда: 30 яиц');
   const prefix=bad?'bad':'good';
   $('score-main-arc').src='assets/oct26-'+prefix+'-imgEllipse8334.svg';
   $('score-other-arc').src='assets/oct26-'+prefix+'-imgEllipse8333.svg';
@@ -258,7 +271,7 @@ async function previewResult(kind){
   $('tutor').inert=false;
   window.scrollTo({top:0,behavior:'instant'});
   if(!await animateScore(token))return;
-  reveal('grade');hasLessonResult=true;
+  reveal('grade');hasLessonResult=true;hasPendingLessonResult=false;
   $('progress-status').textContent=resultKind==='support'?'Оценка 3,2. Правильность 60%, время 8 минут.':'Оценка 4,8. Правильность 96%, время 6 минут.';
 }
 function toggleTaskDetails(expanded){
