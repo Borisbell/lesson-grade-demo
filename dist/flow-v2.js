@@ -37,6 +37,25 @@ function animateScore(token){
     $('result-screen').style.setProperty('--metric-progress',String(eased));
   },token);
 }
+function resetReward(){
+  $('result-reward').dataset.rewardPhase=resultKind==='excellent'?'waiting':'settled';
+}
+async function playReward(token=run){
+  const reward=$('result-reward'),count=$('reward-count');
+  if(resultKind!=='excellent'||reducedMotion){
+    reward.dataset.rewardPhase='settled';count.textContent=resultKind==='excellent'?'30':'10';
+    reveal('result-reward');return true;
+  }
+  resetReward();count.textContent='0';
+  // Reset CSS keyframes even when the previous reveal was interrupted.
+  void reward.offsetWidth;
+  reward.dataset.rewardPhase='playing';reveal('result-reward');
+  if(!await animate(1700,p=>{
+    const progress=Math.max(0,Math.min(1,(p-.73)/.27));
+    count.textContent=String(Math.round(30*(1-Math.pow(1-progress,3))));
+  },token))return false;
+  reward.dataset.rewardPhase='settled';count.textContent='30';return true;
+}
 function syncResultVideo(){
   const video=$('masterclass-video');
   if($('stage').dataset.step==='result'&&resultKind==='excellent'){
@@ -85,7 +104,7 @@ function resetResults(){
   resultParts.forEach(id=>$(id).classList.remove('shown'));
   $('tutor').inert=true;
   metrics.forEach(([id])=>$(id).textContent='0');
-  setScoreProgress(0);
+  setScoreProgress(0);resetReward();
   resetTutorForm();toggleTaskDetails(false);$('result-screen').style.setProperty('--metric-progress','0');
 }
 function clearParentError(){
@@ -155,8 +174,7 @@ async function openResults(){
   reveal('grade');
   $('progress-status').textContent='Оценка 4,8. Правильность 96%, время 6 минут.';
   if(!await pause(reducedMotion?60:850,token))return;
-  reveal('result-reward');
-  if(!await pause(reducedMotion?60:1100,token))return;
+  if(!await playReward(token))return;
   ['tutor','result-details','result-footer'].forEach(reveal);
   $('tutor').inert=false;hasLessonResult=true;hasPendingLessonResult=false;
   $('progress-status').textContent='Итоги готовы. Раскройте статистику по заданиям или запишитесь на бесплатный мастер-класс.';
@@ -169,6 +187,7 @@ function openCalculatedResult(kind='excellent'){
   metrics.forEach(([id,value])=>$(id).textContent=String(value));
   $('result-screen').style.setProperty('--metric-progress','1');
   setScoreProgress(1);
+  playReward(run);
   $('tutor').inert=false;
   $('progress-status').textContent=resultKind==='support'?'Оценка 3,2. Правильность 60%, время 8 минут.':'Оценка 4,8. Правильность 96%, время 6 минут.';
 }
@@ -252,6 +271,7 @@ function applyResult(kind){
   $('lesson-score').setAttribute('aria-label',bad?'Оценка 3,2, средне':'Оценка 4,8, хорошо');
   $('reward-count').textContent=bad?'10':'30';
   $('result-reward').setAttribute('aria-label',bad?'Награда: 10 яиц':'Награда: 30 яиц');
+  resetReward();
   const prefix=bad?'bad':'good';
   $('score-main-arc').src='assets/oct26-'+prefix+'-imgEllipse8334.svg';
   $('score-other-arc').src='assets/oct26-'+prefix+'-imgEllipse8333.svg';
@@ -267,11 +287,12 @@ async function previewResult(kind){
   const token=++run;cancelAnimationFrame(frame);
   const expanded=!$('lesson-task-details').hidden;
   applyResult(kind);resetResults();toggleTaskDetails(expanded);
-  resultParts.filter(id=>id!=='grade').forEach(reveal);
+  resultParts.filter(id=>id!=='grade'&&(id!=='result-reward'||resultKind==='support')).forEach(reveal);
   $('tutor').inert=false;
   window.scrollTo({top:0,behavior:'instant'});
   if(!await animateScore(token))return;
   reveal('grade');hasLessonResult=true;hasPendingLessonResult=false;
+  if(!await playReward(token))return;
   $('progress-status').textContent=resultKind==='support'?'Оценка 3,2. Правильность 60%, время 8 минут.':'Оценка 4,8. Правильность 96%, время 6 минут.';
 }
 function toggleTaskDetails(expanded){

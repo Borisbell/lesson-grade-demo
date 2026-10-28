@@ -20,7 +20,57 @@ body[data-view="analytics"]{background:#f2f3f7}
 .lesson-divider{width:1px;height:124px;background:#2f2f451f}
 .lesson-eggs{width:232px;height:184px;display:flex;flex-direction:column;align-items:center;gap:4px;flex:0 1 232px}
 .lesson-eggs-art{width:160px;height:160px;position:relative;flex:0 0 160px}
-.lesson-eggs-art>img{position:absolute;left:14.82px;top:25.14px;transform:rotate(-2.53deg)}
+.reward-egg-flight{position:absolute;inset:0;transform-origin:50% 50%}
+.reward-egg-flight>img{position:absolute;left:14.82px;top:25.14px;transform:rotate(-2.53deg)}
+.reward-chest-layer{position:absolute;inset:0;opacity:0;pointer-events:none}
+.reward-chest-layer>img{position:absolute;inset:0;width:160px;height:160px;object-fit:cover;transform-origin:50% 85%}
+.reward-chest-opened{opacity:0}
+.reward-burst{position:absolute;inset:8px;border-radius:50%;background:radial-gradient(circle,#fff3a9aa 0%,#ffd66b55 35%,transparent 70%);opacity:0;pointer-events:none}
+.lesson-eggs.reveal{transform:none;transition:opacity .16s ease,visibility .16s}
+.lesson-eggs[data-reward-phase="waiting"] .reward-chest-layer,.lesson-eggs[data-reward-phase="playing"] .reward-chest-layer{opacity:1}
+.lesson-eggs[data-reward-phase="waiting"] .reward-egg-flight,.lesson-eggs[data-reward-phase="waiting"] #reward-count{opacity:0}
+.lesson-eggs[data-reward-phase="playing"] .reward-chest-closed{animation:rewardChestClosed 1.7s both}
+.lesson-eggs[data-reward-phase="playing"] .reward-chest-opened{animation:rewardChestOpened 1.7s both}
+.lesson-eggs[data-reward-phase="playing"] .reward-burst{animation:rewardBurst 1.7s both}
+.lesson-eggs[data-reward-phase="playing"] .reward-egg-flight{animation:rewardEggFlight 1.7s both}
+.lesson-eggs[data-reward-phase="playing"] #reward-count{animation:rewardCountPop 1.7s both}
+@keyframes rewardChestClosed{
+  0%{opacity:0;transform:translateY(12px) scale(.65) rotate(-8deg)}
+  12%{opacity:1;transform:translateY(-4px) scale(1.06) rotate(3deg)}
+  18%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+  23%{transform:translateX(-4px) rotate(-5deg)}
+  27%{transform:translateX(4px) rotate(5deg)}
+  31%{opacity:1;transform:scale(1.06) rotate(-2deg)}
+  32%,100%{opacity:0;transform:scale(1.06)}
+}
+@keyframes rewardChestOpened{
+  0%,31%{opacity:0;transform:translateY(5px) scale(.9)}
+  32%{opacity:1;transform:translateY(-4px) scale(1.05)}
+  42%{opacity:1;transform:translateY(-8px) scale(1.1)}
+  50%{opacity:1;transform:translateY(0) scale(1)}
+  68%{opacity:1;transform:translateY(12px) scale(.9)}
+  82%,100%{opacity:0;transform:translateY(36px) scale(.6)}
+}
+@keyframes rewardBurst{
+  0%,30%{opacity:0;transform:scale(.4)}
+  42%{opacity:1;transform:scale(1.4)}
+  60%,100%{opacity:0;transform:scale(1.65)}
+}
+@keyframes rewardEggFlight{
+  0%,47%{opacity:0;transform:translate(-4px,-14px) scale(.15) rotate(-18deg)}
+  48%{opacity:1;transform:translate(-4px,-16px) scale(.3) rotate(-12deg)}
+  62%{opacity:1;transform:translate(8px,-32px) scale(1.13) rotate(6deg)}
+  76%{transform:translate(-2px,3px) scale(.97) rotate(-3deg)}
+  88%{transform:translate(1px,-2px) scale(1.02) rotate(1deg)}
+  100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+}
+@keyframes rewardCountPop{
+  0%,72%{opacity:0;transform:translateY(8px) scale(.3)}
+  74%{opacity:1;transform:translateY(0) scale(.6)}
+  86%{opacity:1;transform:scale(1.2)}
+  94%{transform:scale(.95)}
+  100%{opacity:1;transform:scale(1)}
+}
 .lesson-eggs-art>strong{position:absolute;right:2.67px;bottom:2.67px;min-width:53.333px;height:53.333px;border:5.333px solid #fff;border-radius:100px;background:#f5f6f7;display:grid;place-items:center;padding:0 10.667px;font-size:32px;line-height:42.667px}
 .lesson-eggs p{font-size:14px;line-height:20px;text-align:center}
 .lesson-metrics{display:flex;flex-direction:column;gap:24px;margin-top:24px}
@@ -165,6 +215,8 @@ body[data-view="analytics"] .demo-controls button,body[data-view="dashboard"] .d
   .metric-fill{height:8px}
   .lesson-details-toggle{height:48px;min-height:48px;margin-top:8px;font-size:14px;line-height:20px;border-radius:12px}
   .masterclass-card{padding:16px;border-radius:20px}
+  .masterclass-card.reveal{transform:translateY(16px)}
+  .masterclass-card.reveal.shown{transform:translateY(0)}
   .masterclass-card h3,#support-recommendation h3,.section-summary-copy h4{font-size:36px;line-height:34px;margin-bottom:8px}
   .masterclass-card .recommendation-label{font-size:11px;line-height:14px;margin-bottom:8px}
   .masterclass-card .recommendation-copy,#support-recommendation .recommendation-copy{font-size:14px;line-height:20px;margin-bottom:12px}
