@@ -1,0 +1,14 @@
+{
+  "name": "lesson-grade-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive lesson and grade prototype, ready for GitHub Pages",
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "node tests/math-exercise.test.cjs && node tests/flow.test.cjs",
+    "start": "node server.cjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
