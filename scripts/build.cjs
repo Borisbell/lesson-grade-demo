@@ -43,5 +43,14 @@ for (const file of files) {
   }
 }
 fs.writeFileSync(path.join(root, '.nojekyll'), '');
+// Match branch-based Pages layout so both deployment methods use identical URLs.
+const project = path.resolve(__dirname, '..');
+const output = path.resolve(project, '.pages');
+if (path.dirname(output) !== project || path.basename(output) !== '.pages') throw new Error('Unsafe build output');
+fs.rmSync(output, { recursive: true, force: true });
+fs.mkdirSync(output);
+fs.cpSync(root, path.join(output, 'dist'), { recursive: true });
+fs.copyFileSync(path.join(project, 'index.html'), path.join(output, 'index.html'));
+fs.copyFileSync(path.join(project, '.nojekyll'), path.join(output, '.nojekyll'));
 const bytes = files.reduce((total, file) => total + fs.statSync(file).size, 0);
-console.log(`Build ready: dist/ (${files.length} files, ${(bytes / 1024 / 1024).toFixed(1)} MiB). All local references and JavaScript syntax checked.`);
+console.log(`Build ready: .pages/ (${files.length} application files, ${(bytes / 1024 / 1024).toFixed(1)} MiB). All local references and JavaScript syntax checked.`);
