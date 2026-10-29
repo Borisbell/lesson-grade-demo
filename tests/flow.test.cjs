@@ -47,8 +47,8 @@ const checkHeader=()=>{assert.equal(element('nav-profile-name').textContent,'У�
   assert.equal(element('result-reward').dataset.rewardPhase,'settled');
   click('preview-excellent');await advance(1900);await advance(1700);click('toggle-lesson-details');
   assert.equal(element('reward-count').textContent,'30');assert.equal(element('result-reward').attributes['aria-label'],'Награда: 30 яиц');
-  assert.match(element('reward-chest-closed').src,/reward-chest-4-closed.png/);assert.match(element('reward-chest-opened').src,/reward-chest-4-opened.png/);
-  click('preview-support');await advance(1900);await advance(1350);assert.ok(Number(element('reward-count').textContent)>0&&Number(element('reward-count').textContent)<10);click('preview-excellent');await advance(1900);await advance(1700);assert.equal(element('reward-count').textContent,'30');assert.match(element('reward-chest-closed').src,/reward-chest-4-closed.png/);
+  assert.match(element('reward-chest-closed').src,/reward-chest-5-closed.png/);assert.match(element('reward-chest-opened').src,/reward-chest-5-opened.png/);
+  click('preview-support');await advance(1900);await advance(1350);assert.ok(Number(element('reward-count').textContent)>0&&Number(element('reward-count').textContent)<10);click('preview-excellent');await advance(1900);await advance(1700);assert.equal(element('reward-count').textContent,'30');assert.match(element('reward-chest-closed').src,/reward-chest-5-closed.png/);
   click('continue');assert.equal(element('stage').dataset.step,'bonus');checkHeader();await click('copy-coupon');assert.equal(copied,'ПРОМОКОД375');assert.equal(element('copy-coupon-label').textContent,'Скопировано!');
   click('use-coupon');assert.equal(element('stage').dataset.step,'result');assert.equal(element('grade').classes.has('shown'),true);assert.equal(element('correct').textContent,'96');
   click('continue');click('bonus-continue');assert.equal(element('stage').dataset.step,'dashboard');assert.equal(element('body').dataset.completed,'true');assert.equal(element('dashboard-tutor-promo').hidden,false);

@@ -284,7 +284,7 @@ function applyResult(kind){
   $('lesson-score').setAttribute('aria-label',bad?'Оценка 3, средне':'Оценка 5, отлично');
   $('reward-count').textContent=bad?'10':'30';
   $('result-reward').setAttribute('aria-label',bad?'Награда: 10 яиц':'Награда: 30 яиц');
-  const chestGrade=bad?'3':'4';
+  const chestGrade=bad?'3':'5';
   $('reward-chest-closed').src='assets/reward-chest-'+chestGrade+'-closed.png';
   $('reward-chest-opened').src='assets/reward-chest-'+chestGrade+'-opened.png';
   resetReward();
