@@ -74,7 +74,7 @@ function playParentNarration(){
   if(playback)playback.catch(()=>{});
 }
 function setHeader(bonus){
-  $('nav-profile-name').textContent=bonus?'Ученик':'Константин К.';
+  $('nav-profile-name').textContent='Ученик';
   $('nav-logo').src=bonus?'assets/reward-imgUchi.svg':'assets/v2-logo.svg';
   $('nav-quest-icon').src=bonus?'assets/reward-imgGroup3965.svg':'assets/v2-quests.svg';
   $('nav-teacher-icon').src=bonus?'assets/reward-imgGroup1321316219.svg':'assets/v2-homework.svg';
@@ -82,8 +82,8 @@ function setHeader(bonus){
   $('nav-coins-icon').src=bonus?'assets/reward-imgGroup1321315931.svg':'assets/v2-coins.svg';
   $('nav-quest-counter').textContent=bonus?'4':'1';
   $('nav-gems-value').textContent='0';
-  $('nav-coins-value').textContent=bonus?'123':'1734';
-  $('egg-balance').textContent=bonus?'28':'1576';
+  $('nav-coins-value').textContent='15';
+  $('egg-balance').textContent='32';
 }
 function showScreen(id,step,title){
   if(id==='parent-screen')playParentNarration();else stopParentNarration();
@@ -179,7 +179,7 @@ async function openResults(){
   if(!await pause(reducedMotion?60:450,token))return;
   if(!await animateScore(token))return;
   reveal('grade');
-  $('progress-status').textContent='Оценка 4,8. Правильность 96%, время 6 минут.';
+  $('progress-status').textContent='Оценка 5. Правильность 96%, время 6 минут.';
   if(!await pause(reducedMotion?60:850,token))return;
   if(!await playReward(token))return;
   ['tutor','result-details','result-footer'].forEach(reveal);
@@ -196,7 +196,7 @@ function openCalculatedResult(kind='excellent'){
   setScoreProgress(1);
   playReward(run);
   $('tutor').inert=false;
-  $('progress-status').textContent=resultKind==='support'?'Оценка 3,2. Правильность 60%, время 8 минут.':'Оценка 4,8. Правильность 96%, время 6 минут.';
+  $('progress-status').textContent=resultKind==='support'?'Оценка 3. Правильность 60%, время 8 минут.':'Оценка 5. Правильность 96%, время 6 минут.';
 }
 function openBonus(){
   run++;cancelAnimationFrame(frame);
@@ -273,9 +273,9 @@ function applyResult(kind){
   $('preview-support').setAttribute('aria-pressed',String(bad));
   metrics=[['minutes',bad?8:6],['correct',bad?60:96]];
   $('result-screen').dataset.resultKind=resultKind;
-  $('score-value').textContent=bad?'3,2':'4,8';$('score-caption').hidden=false;
+  $('score-value').textContent=bad?'3':'5';$('score-caption').hidden=false;
   $('score-caption').textContent=bad?'Средне':'Хорошо';
-  $('lesson-score').setAttribute('aria-label',bad?'Оценка 3,2, средне':'Оценка 4,8, хорошо');
+  $('lesson-score').setAttribute('aria-label',bad?'Оценка 3, средне':'Оценка 5, хорошо');
   $('reward-count').textContent=bad?'10':'30';
   $('result-reward').setAttribute('aria-label',bad?'Награда: 10 яиц':'Награда: 30 яиц');
   const chestGrade=bad?'3':'4';
@@ -303,11 +303,12 @@ async function previewResult(kind){
   if(!await animateScore(token))return;
   reveal('grade');hasLessonResult=true;hasPendingLessonResult=false;
   if(!await playReward(token))return;
-  $('progress-status').textContent=resultKind==='support'?'Оценка 3,2. Правильность 60%, время 8 минут.':'Оценка 4,8. Правильность 96%, время 6 минут.';
+  $('progress-status').textContent=resultKind==='support'?'Оценка 3. Правильность 60%, время 8 минут.':'Оценка 5. Правильность 96%, время 6 минут.';
 }
 function toggleTaskDetails(expanded){
   $('lesson-task-details').hidden=!expanded;$('toggle-lesson-details').setAttribute('aria-expanded',String(expanded));
-  $('toggle-lesson-details').textContent=expanded?'Скрыть':'Подробнее';
+  $('lesson-details-label').textContent=expanded?'Скрыть':'Подробнее';
+  $('lesson-details-chevron').src=expanded?'assets/result-details-chevron-up.svg':'assets/result-details-chevron.svg';
 }
 function updateTeacherScale(){const width=$('teacher-photo').clientWidth;if(width)$('teacher-photo').style.setProperty('--teacher-scale',String(width/550));}
 function openSignup(){resetTutorForm();$('signup-dialog').showModal();$('phone').focus();}

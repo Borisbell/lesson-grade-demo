@@ -85,7 +85,11 @@ body[data-view="analytics"]{background:#f2f3f7}
 .child-fill{width:var(--fill-width);background:#7ce64f;transform:scaleX(var(--metric-progress))}
 #correct-fill{--fill-width:96%}#speed-fill{--fill-width:75%}
 .peer-fill{background:#2f2f4566}
-.lesson-details-toggle{width:100%;color:#765fde;background:#eae6ff;margin-top:24px}
+.lesson-details-toggle{width:100%;color:#765fde;background:transparent;margin-top:24px;gap:8px;padding:4px 24px 4px 28px}
+.lesson-details-chevron{position:relative;display:block;width:18px;height:24px;flex:0 0 18px}
+.lesson-details-chevron img{position:absolute;left:-3px;top:0;max-width:none}
+.lesson-analytics .button:not(:disabled):hover,.lesson-analytics .button:not(:disabled):active{transform:none;box-shadow:none}
+.lesson-details-toggle:hover{background:transparent}
 .lesson-task-details{margin-top:32px}
 .lesson-task-details h3{font-size:24px;line-height:30px;margin-bottom:24px}
 #lesson-task-list{display:flex;flex-direction:column;gap:24px}
@@ -101,13 +105,14 @@ body[data-view="analytics"]{background:#f2f3f7}
 .masterclass-card h3{font-size:32px;line-height:40px;font-weight:800;margin-bottom:16px;letter-spacing:-.3px}
 .recommendation-copy{font-size:18px;line-height:26px;margin-bottom:16px}
 .masterclass-game{display:block;width:100%;height:259px;object-fit:cover;border-radius:28px}
-.masterclass-signup{width:100%;background:#ff6170;color:#fff;margin-top:16px;white-space:nowrap;font-size:18px;padding:4px 16px}
+.masterclass-signup{width:100%;background:#ff6170;color:#fff;margin-top:16px;white-space:nowrap;font-size:18px;padding:4px 24px}
 .masterclass-signup:hover{background:#f64d60}
 .masterclass-legal{display:flex;gap:8px;align-items:center;margin-top:12px;min-height:24px}
 .masterclass-legal p{font-size:10px;line-height:12px;color:#ffffff99;flex:1;min-width:0}
 .masterclass-legal .ad{font-size:11px;flex-shrink:0}
 .lesson-result-footer{display:flex;justify-content:center;height:88px;padding:16px}
-.lesson-result-footer .button{color:#765fde;background:transparent;width:240px}
+.lesson-result-footer .button{color:#fff;background:#765fde;width:240px}
+.lesson-result-footer .button:hover{background:#6650cb}
 .result-preview-controls{position:fixed;left:12px;bottom:12px;z-index:6;display:flex;align-items:center;gap:2px;padding:4px;border:1px solid #d8d3ed;border-radius:12px;background:#fffffff2;color:#787886}
 .result-preview-controls>span{padding:0 6px;font-size:11px;line-height:16px}
 .result-preview-controls button{min-width:36px;height:28px;padding:4px 8px;border-radius:8px;background:transparent;color:#765fde;font-size:12px;line-height:20px;font-variant-numeric:tabular-nums;box-shadow:none}
