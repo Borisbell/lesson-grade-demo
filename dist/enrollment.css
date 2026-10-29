@@ -1,0 +1,36 @@
+#result-enrollment{width:100%;margin-top:16px}
+.inline-enrollment{width:100%;min-width:0;container:enrollment / inline-size}
+.inline-enrollment .phone-form{position:static;inset:auto;width:100%;height:auto;min-height:60px;border-radius:24px;background:#fff;display:flex;flex-direction:row;align-items:center;gap:8px;padding:6px 6px 6px 12px}
+.inline-enrollment .phone-field{display:flex;flex-direction:column;justify-content:center;flex:0 0 192px;width:192px;height:48px;min-width:0;padding:4px}
+.inline-enrollment .phone-field label{margin:0;font-size:12px;line-height:16px;color:#2f2f45}
+.inline-enrollment .phone-field input{display:block;width:100%;min-width:0;height:28px;border:0;background:transparent;padding:0;font-size:20px;line-height:28px;color:#2f2f45cc;outline-offset:0}
+.inline-enrollment .phone-field input::placeholder{color:#2f2f45cc}
+.inline-enrollment .phone-form:has([aria-invalid="true"]){outline:2px solid #ff6170;outline-offset:2px}
+.inline-enrollment .signup{flex:1 1 auto;min-width:0;height:48px;padding:4px 20px;border-radius:16px;background:#ff6170;color:#fff;font-size:18px;line-height:22px;white-space:nowrap;transform:none;box-shadow:none}
+.inline-enrollment .signup:hover{background:#f64d60;transform:none;box-shadow:none}
+.inline-enrollment .phone-error{color:#fff;font-size:13px;line-height:18px;margin:8px 4px 0}
+.inline-enrollment .masterclass-legal{display:flex;align-items:center;gap:8px;margin-top:12px;min-height:24px}
+.inline-enrollment .masterclass-legal p{font-size:10px;line-height:12px;color:#ffffff99;min-width:0;flex:1;margin:0}
+.inline-enrollment .masterclass-legal u{font-size:12px;line-height:16px;text-underline-offset:2px}
+.inline-enrollment .ad{display:flex;align-items:center;justify-content:center;gap:0;padding:2px 6px;border-radius:1000px;background:#2f2f4540;backdrop-filter:blur(25px);font-size:11px;line-height:14px;color:#fff;flex-shrink:0}
+.enrollment-ad-icon{position:relative;display:block;width:8px;height:12px;overflow:hidden}
+.enrollment-ad-icon img{position:absolute;left:-2px;top:0;max-width:none}
+.inline-enrollment .inline-success{position:static;display:flex;flex-direction:column;align-items:center;gap:20px;padding:24px 16px;border-radius:24px;background:#fff;color:#2f2f45;text-align:center}
+.inline-success>div{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%}
+.inline-enrollment .inline-success h3{font-family:inherit;font-size:24px;line-height:30px;font-weight:700;letter-spacing:0;margin:0}
+.inline-enrollment .inline-success p{font-size:16px;line-height:24px;margin:0}
+.inline-success button{color:#765fde;background:transparent;text-decoration:underline;text-underline-offset:2px;font-size:16px;line-height:24px;padding:0}
+.inline-enrollment:has(.inline-success:not([hidden])) .masterclass-legal{display:none}
+@container enrollment (max-width:440px){
+  .inline-enrollment .phone-form{flex-direction:column;align-items:stretch;padding:6px;gap:6px}
+  .inline-enrollment .phone-field{flex:0 0 48px;width:100%;padding:4px 10px}
+  .inline-enrollment .signup{flex:none;width:100%}
+  .inline-enrollment .masterclass-legal{align-items:flex-start}
+}
+@media(max-width:600px){
+  #result-enrollment{margin-top:12px}
+  .inline-enrollment .signup{font-size:16px}
+  .inline-enrollment .inline-success{padding:20px 12px;gap:16px}
+  .inline-enrollment .inline-success h3{font-size:22px;line-height:28px}
+  .inline-enrollment .inline-success p{font-size:14px;line-height:20px}
+}

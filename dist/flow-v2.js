@@ -2,6 +2,7 @@
 const $ = id => document.getElementById(id);
 const screens=['dashboard-screen','exercise-screen','reward-screen','parent-screen','result-screen','bonus-screen'];
 const resultParts=['statistics','grade','result-reward','tutor','result-details','result-footer'];
+$('result-enrollment').innerHTML=enrollmentMarkup();
 let resultKind='excellent';
 let metrics=[['minutes',6],['correct',96]];
 const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -96,9 +97,9 @@ function showScreen(id,step,title){
   $(title).focus({preventScroll:true});
   window.scrollTo({top:0,behavior:'instant'});
 }
-function resetTutorForm(){
-  $('phone').value='';$('phone-error').hidden=true;$('phone').removeAttribute('aria-invalid');
-  $('tutor-form').hidden=false;$('teacher-photo').hidden=false;$('tutor-success').hidden=true;
+function resetTutorForm(prefix=''){
+  $(prefix+'phone').value='';$(prefix+'phone-error').hidden=true;$(prefix+'phone').removeAttribute('aria-invalid');
+  $(prefix+'tutor-form').hidden=false;$(prefix+'tutor-success').hidden=true;
 }
 function resetResults(){
   resultParts.forEach(id=>$(id).classList.remove('shown'));
@@ -113,7 +114,7 @@ function clearParentError(){
 function returnToMath(){
   stopMathExercise();
   run++;cancelAnimationFrame(frame);
-  $('demo-dialog').close();$('parent-check').close();$('signup-dialog').close();
+  $('demo-dialog').close();$('parent-check').close();
   ready=false;parentVerified=false;
   $('parent-answer').value='';clearParentError();resetResults();
   resetDashboard(hasLessonResult,hasPendingLessonResult);
@@ -216,8 +217,10 @@ $('lesson-modules').addEventListener('click',event=>{
   else if(event.target.closest('[data-resume-grade]'))resumeLessonResult();
   else if(event.target.closest('[data-open-result]'))openCalculatedResult('excellent');
   else if(event.target.closest('[data-open-support]')){openCalculatedResult('support');toggleTaskDetails(true);}
-  else if(event.target.closest('[data-section-signup]'))openSignup();
+  else if(event.target.closest('#summary-tutor-retry')){resetTutorForm('summary-');$('summary-phone').focus();}
 });
+$('lesson-modules').addEventListener('input',event=>{if(event.target.id==='summary-phone')formatTutorPhone(event);});
+$('lesson-modules').addEventListener('submit',event=>{if(event.target.id==='summary-tutor-form')submitTutorForm(event,'summary-');});
 $('learn-grade').addEventListener('click',prepareGrade);
 $('open-result').addEventListener('click',openParentCheck);
 $('parent-check-close').addEventListener('click',closeParentCheck);
@@ -244,12 +247,12 @@ $('copy-coupon').addEventListener('click',async()=>{
   catch{openDialog('ПРОМОКОД375','Скидка 20% на любые занятия. Сохраните промокод, чтобы использовать его позже.','Понятно',()=>$('demo-dialog').close());}
 });
 $('use-coupon').addEventListener('click',()=>{
-  if(hasLessonResult){openCalculatedResult(resultKind);openSignup();$('progress-status').textContent='Промокод ПРОМОКОД375 выбран. Запишитесь на занятие с репетитором.';}
+  if(hasLessonResult){openCalculatedResult(resultKind);focusEnrollment();$('progress-status').textContent='Промокод ПРОМОКОД375 выбран. Запишитесь на занятие с репетитором.';}
   else openDialog('Скидка 20% на занятия','Твой промокод — ПРОМОКОД375. Сохрани его, чтобы использовать при выборе занятий.','Вернуться к урокам',returnToMath);
 });
 $('close-dialog').addEventListener('click',()=>$('demo-dialog').close());
 $('dialog-action').addEventListener('click',()=>dialogAction());
-$('phone').addEventListener('input',event=>{
+function formatTutorPhone(event){
   let digits=event.target.value.replace(/\D/g,'');
   if(digits.startsWith('7')||digits.startsWith('8'))digits=digits.slice(1);
   digits=digits.slice(0,10);
@@ -257,15 +260,18 @@ $('phone').addEventListener('input',event=>{
   if(digits.length>=3)value+=') '+digits.slice(3,6);
   if(digits.length>=6)value+='-'+digits.slice(6,8);
   if(digits.length>=8)value+='-'+digits.slice(8,10);
-  event.target.value=value;$('phone-error').hidden=true;event.target.removeAttribute('aria-invalid');
-});
-$('tutor-form').addEventListener('submit',event=>{
+  event.target.value=value;$(event.target.id==='summary-phone'?'summary-phone-error':'phone-error').hidden=true;event.target.removeAttribute('aria-invalid');
+}
+function submitTutorForm(event,prefix=''){
   event.preventDefault();
-  if($('phone').value.replace(/\D/g,'').length!==11){$('phone-error').hidden=false;$('phone').setAttribute('aria-invalid','true');$('phone').focus();return;}
-  $('phone-error').hidden=true;$('phone').removeAttribute('aria-invalid');
-  $('tutor-form').hidden=true;$('tutor-success').hidden=false;
-  $('tutor-success-title').focus({preventScroll:true});
-});
+  const phone=$(prefix+'phone'),error=$(prefix+'phone-error');
+  if(!/^7\d{10}$/.test(phone.value.replace(/\D/g,''))){error.hidden=false;phone.setAttribute('aria-invalid','true');phone.focus();return;}
+  error.hidden=true;phone.removeAttribute('aria-invalid');
+  $(prefix+'tutor-form').hidden=true;$(prefix+'tutor-success').hidden=false;
+  $(prefix+'tutor-success-title').focus({preventScroll:true});
+}
+$('phone').addEventListener('input',formatTutorPhone);
+$('tutor-form').addEventListener('submit',event=>submitTutorForm(event));
 $('tutor-retry').addEventListener('click',()=>{resetTutorForm();$('phone').focus();});
 function applyResult(kind){
   resultKind=kind==='support'?'support':'excellent';const bad=resultKind==='support';
@@ -274,8 +280,8 @@ function applyResult(kind){
   metrics=[['minutes',bad?8:6],['correct',bad?60:96]];
   $('result-screen').dataset.resultKind=resultKind;
   $('score-value').textContent=bad?'3':'5';$('score-caption').hidden=false;
-  $('score-caption').textContent=bad?'Средне':'Хорошо';
-  $('lesson-score').setAttribute('aria-label',bad?'Оценка 3, средне':'Оценка 5, хорошо');
+  $('score-caption').textContent=bad?'Средне':'Отлично';
+  $('lesson-score').setAttribute('aria-label',bad?'Оценка 3, средне':'Оценка 5, отлично');
   $('reward-count').textContent=bad?'10':'30';
   $('result-reward').setAttribute('aria-label',bad?'Награда: 10 яиц':'Награда: 30 яиц');
   const chestGrade=bad?'3':'4';
@@ -311,12 +317,10 @@ function toggleTaskDetails(expanded){
   $('lesson-details-chevron').src=expanded?'assets/result-details-chevron-up.svg':'assets/result-details-chevron.svg';
 }
 function updateTeacherScale(){const width=$('teacher-photo').clientWidth;if(width)$('teacher-photo').style.setProperty('--teacher-scale',String(width/550));}
-function openSignup(){resetTutorForm();$('signup-dialog').showModal();$('phone').focus();}
+function focusEnrollment(){resetTutorForm();$('phone').focus();}
 $('toggle-lesson-details').addEventListener('click',()=>toggleTaskDetails($('lesson-task-details').hidden));
 $('preview-excellent').addEventListener('click',()=>previewResult('excellent'));
 $('preview-support').addEventListener('click',()=>previewResult('support'));
-$('masterclass-signup').addEventListener('click',openSignup);
-$('signup-close').addEventListener('click',()=>$('signup-dialog').close());
 window.addEventListener('resize',updateTeacherScale);
 window.addEventListener('pagehide',stopParentNarration);
 applyResult('excellent');setHeader(false);
